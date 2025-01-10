@@ -3,61 +3,33 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserControlle;
 
-
-// Show the login form
-// Show the login form
+// login form
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-
-// Handle the login form submission
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
+// register form
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
+// logout route
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// home route
+Route::get('/', function () {
+    return view('home');
+});
+
+// Protect the routes with the 'auth' middleware
 Route::middleware('auth')->group(function () {
+    // User dashboard route
+    Route::get('/user/dashboard', [UserControlle::class, 'getArticles'])->name('user.dashboard');
+
+    // Admin dashboard route
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard'); // Admin dashboard view
     })->name('admin.dashboard');
 
-    Route::get('/user/dashboard', function () {
-        return view('user.dashboard'); // User dashboard view
-    })->name('user.dashboard');
-
-    Route::get('/home', function () {
-        return view('home'); // Default home view
-    })->name('home');
-});
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Show the registration form
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
-// User dashboard route
-Route::middleware('auth')->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('user.dashboard');
-    })->name('user.dashboard');
-
-    Route::get('/user/dashboard', [UserControlle::class, 'getArticles'])->middleware('auth');
-});
-
-
-
-Route::get('/', function(){
-    return view('home');
-});
-
-
-
-
-// Protect the routes with the 'auth' middleware
-Route::middleware('auth')->group(function () {
-    // Show the form to create a post
+    // Create post routes
     Route::get('/createPoste', [UserControlle::class, 'showCreatePoste'])->name('createPoste.form');
-
-    // Handle the form submission to create a post
     Route::post('/createPoste', [UserControlle::class, 'createPoste'])->name('createPoste.submit');
 });
-
-
-
-?>
-
-
