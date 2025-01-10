@@ -16,6 +16,12 @@
     <form action="{{ route('createPoste.submit') }}" method="POST">
         @csrf
         Title: <input type="text" name="title"><br>
+        <label for="theme">Choose a theme:</label>
+        <select name="theme" id="theme">
+            @foreach($themes as $theme)
+                <option value="{{ $theme->id }}" name="theme">{{ $theme->nom_theme }}</option>
+            @endforeach
+        </select><br>
         Article: <textarea name="article"></textarea><br>
         <button type="submit">Submit</button>
     </form>

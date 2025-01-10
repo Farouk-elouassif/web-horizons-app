@@ -12,7 +12,23 @@
     <form action="{{ route('logout') }}" method="POST">
     @csrf
     <button type="submit">Logout</button>
-    <a href="{{route("createPoste.submit")}}"></a>
+    <button><a href="{{route('createPoste.form')}}">Create Post</a></button>
+    <button>Show My Posts</button>
+    <h1>My Articles</h1>
+
+    @if($articles->isEmpty())
+        <p>You have not created any articles yet.</p>
+    @else
+        <ul>
+            @foreach($articles as $article)
+                <li>
+                    <h2>{{ $article->titre }}</h2>
+                    <p>{{ $article->contenu }}</p>
+                    <small>Created at: {{ $article->created_at->format('Y-m-d H:i:s') }}</small>
+                </li>
+            @endforeach
+        </ul>
+    @endif
 </form>
 </body>
 </html>
