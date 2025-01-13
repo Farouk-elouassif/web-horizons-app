@@ -23,8 +23,14 @@
                 @foreach($articles as $article)
                     <li>
                         <h2>{{ $article->titre }}</h2>
-                        <p>{{ $article->contenu }}</p>
+                        <p>{{ $article->contenu }}</p>>
                         <small>Created at: {{ $article->created_at->format('Y-m-d H:i:s') }}</small>
+                         <!-- Delete Button -->
+                        <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                        </form>
                     </li>
                 @endforeach
             </ul>

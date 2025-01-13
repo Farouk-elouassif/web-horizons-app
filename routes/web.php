@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard'); // Admin dashboard view
     })->name('admin.dashboard');
 
+    Route::delete('/article/delete/{id}', [UserControlle::class, 'deleteArticle'])->name('article.delete');
+
     // Create post routes
     Route::get('/createPoste', [UserControlle::class, 'showCreatePoste'])->name('createPoste.form');
     Route::post('/createPoste', [UserControlle::class, 'createPoste'])->name('createPoste.submit');

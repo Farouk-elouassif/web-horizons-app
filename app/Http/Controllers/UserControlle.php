@@ -50,4 +50,17 @@ class UserControlle extends Controller
         // Pass the articles to the view
         return view('user.dashboard', compact('articles'));
     }
+    public function deleteArticle($id){
+        // Find the article by ID
+        $article = Article::find($id);
+
+        // Check if the article exists and belongs to the logged-in user
+        if ($article && $article->user_id === Auth::id()) {
+            $article->delete(); // Delete the article
+            return redirect()->route('user.dashboard')->with('success', 'Article deleted successfully!');
+        }
+
+        // If the article doesn't exist or doesn't belong to the user, redirect with an error message
+        return redirect()->route('user.dashboard')->with('error', 'Article not found or you do not have permission to delete it.');
+    }
 }
