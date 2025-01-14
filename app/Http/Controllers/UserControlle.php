@@ -12,7 +12,7 @@ class UserControlle extends Controller
     // Show the form to create a post
     public function showCreatePoste(){
         $themes = Theme::all();
-        return view("user.createPoste", compact('themes'));
+        return view("user.write", compact('themes'));
     }
 
     // Handle the form submission to create a post
@@ -37,7 +37,7 @@ class UserControlle extends Controller
         ]);
 
         // Redirect back with a success message
-        return redirect()->route('createPoste.form')->with('success', 'Article created successfully!');
+        return redirect()->route('write.form')->with('success', 'Article created successfully!');
     }
 
     public function getArticles(){

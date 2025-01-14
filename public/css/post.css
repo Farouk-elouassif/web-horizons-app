@@ -1,9 +1,9 @@
 .article-cover {
-    width: 700px; /* Adjust as needed */
+    width: 700px;
     padding: 20px;
-    background-color: #fff;
+    background-color: rgb(245, 238, 228 );
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-left: 20PX;
@@ -58,6 +58,10 @@ h4 {
     font-weight: 500;
     transition: background-color 0.3s ease;
     border: 0px;
+    cursor: pointer;
+}
+.article-cover form  .delete-button:hover{
+    background-color: rgb(255, 56, 56);
 }
 
 .article-cover .cta-button:hover {

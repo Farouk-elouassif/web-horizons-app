@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/write', function () {
+    return view('user.write');
+});
+
 Route::get('/topics', function () {
     $themes = Theme::all();
     return view('topics', compact('themes'));
@@ -53,8 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/article/delete/{id}', [UserControlle::class, 'deleteArticle'])->name('article.delete');
 
     // Create post routes
-    Route::get('/createPoste', [UserControlle::class, 'showCreatePoste'])->name('createPoste.form');
-    Route::post('/createPoste', [UserControlle::class, 'createPoste'])->name('createPoste.submit');
+    Route::get('/user/write', [UserControlle::class, 'showCreatePoste'])->name('write.form');
+    Route::post('/user/write', [UserControlle::class, 'createPoste'])->name('write.submit');
 
     Route::get('/themes', function () {
         return view('auth.themes');
