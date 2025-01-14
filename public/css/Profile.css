@@ -392,11 +392,11 @@
     background-color: #333;
 }
 
-.article-card .actions .delete-button {
+.article-card .actions form .delete-button {
     background-color: #cc0000;
 }
 
-.article-card .actions .delete-button:hover {
+.article-card .actions form .delete-button:hover {
     background-color: #990000;
 }
 

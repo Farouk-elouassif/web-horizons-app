@@ -37,7 +37,7 @@
                     </div>
                 <div class="profile-info">
                     <h2 class="profile-name">{{$user->nom}}</h2>
-                    <p class="profile-date">{{$user->date_inscription}} <span class="icon-lock">🔒</span></p>
+                    <p class="profile-date">{{$user->created_at->format('M d, Y')}} <span class="icon-lock">🔒</span></p>
                 </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                                     <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                        <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this post?')" >Delete</button>
                                     </form>
                                 </div>
                             </div>

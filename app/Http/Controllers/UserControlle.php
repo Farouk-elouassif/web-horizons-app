@@ -30,7 +30,7 @@ class UserControlle extends Controller
         $article = Article::create([
             'titre' => $request->title,
             'contenu' => $request->article,
-            'statu' => 'En cours', // Default status
+            'statut' => 'Refusé', // Default status
             'theme_id' => $request->theme,  // You can update this to dynamically assign a theme
             'user_id' => $user->id, // Associate the article with the logged-in user
             'date_proposition' => now(),
@@ -50,7 +50,7 @@ class UserControlle extends Controller
         ->get();
 
     // Pass the articles to the view
-    return view('user.Profile', compact('articles', 'user'));
+    return view('user.profile', compact('articles', 'user'));
 }
     public function deleteArticle($id){
         // Find the article by ID
@@ -59,10 +59,10 @@ class UserControlle extends Controller
         // Check if the article exists and belongs to the logged-in user
         if ($article && $article->user_id === Auth::id()) {
             $article->delete(); // Delete the article
-            return redirect()->route('user.Profile')->with('success', 'Article deleted successfully!');
+            return redirect()->route('user.profile')->with('success', 'Article deleted successfully!');
         }
 
         // If the article doesn't exist or doesn't belong to the user, redirect with an error message
-        return redirect()->route('user.Profile')->with('error', 'Article not found or you do not have permission to delete it.');
+        return redirect()->route('user.profile')->with('error', 'Article not found or you do not have permission to delete it.');
     }
 }

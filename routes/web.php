@@ -20,6 +20,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/topics', function () {
+    $themes = Theme::all();
+    return view('topics', compact('themes'));
+})->name('topics');
+
 Route::get('/profile', function () {
     $user = Auth::user();
 
@@ -29,9 +35,9 @@ Route::get('/profile', function () {
         ->get();
 
     // Pass the articles to the view
-    return view('user.Profile', compact('articles', 'user'));
+    return view('user.profile', compact('articles', 'user'));
 
-})->name('user.Profile');
+})->name('user.profile');
 
 
 // Protect the routes with the 'auth' middleware

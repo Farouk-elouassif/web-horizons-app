@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Horizons</title>
-    <link rel="icon" type="image/jpeg" href="{{ asset('favicon.jpeg') }}">
-    <link rel="stylesheet" href="{{asset("css/home.css")}}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Horizons - Topics</title>
+  <link rel="stylesheet" href="{{asset('css/topics.css')}}">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <div class="logo">
             <a href="#">Tech Horizons</a>
@@ -15,7 +16,7 @@
         <div class="rightside">
             <nav class="nav-links">
                 <ul>
-                    <li><a href="{{route("topics")}}" target="_blank">Topics</a></li>
+                    <li><a href="">Topics</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="{{route("login")}}" class="login-btn">Sign In</a></li>
                 </ul>
@@ -26,17 +27,23 @@
             <button class="hamburger" onclick="toggleMenu()">☰</button>
         </div>
     </header>
-    <div class="bodyPage">
-        <div id="backgim">
-            <div class="bodyContent">
-                <div class="TitlePage">
-                    <p>Technologie</p>
-                    <p>Stories & Ideas</p>
+
+    <!-- Topics Section -->
+    <section class="topics">
+        <div class="container">
+            <h1>Explore Topics</h1>
+        <div class="topics-grid">
+            @foreach ($themes as $theme)
+                <div class="topic-card">
+                    <h2>{{$theme->nom_theme}}</h2>
+                    <p>{{$theme->description}}</p>
                 </div>
-            <p id="parag">A place to read, write, and deepen your understanding</p>
-            <a href="{{route("register")}}" class="secbtn signup-btn">Start Reading</a>
+            @endforeach
         </div>
-    </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <ul class="listFooter">
             <li><a href="mailto:elouassiffarouk@gmail.com" target="_blank">Help</a></li>
@@ -45,7 +52,5 @@
             <li><a href="https://github.com/Farouk-elouassif/web-horizons-app.git" target="_blank">Github</a></li>
         </ul>
     </footer>
-    </div>
-    <script src="{{asset("js/Edit.js")}}"></script>
 </body>
 </html>
