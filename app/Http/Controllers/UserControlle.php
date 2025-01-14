@@ -30,7 +30,7 @@ class UserControlle extends Controller
         $article = Article::create([
             'titre' => $request->title,
             'contenu' => $request->article,
-            'statut' => 'Refusé', // Default status
+            'statut' => 'En cours', // Default status
             'theme_id' => $request->theme,  // You can update this to dynamically assign a theme
             'user_id' => $user->id, // Associate the article with the logged-in user
             'date_proposition' => now(),

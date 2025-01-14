@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{$user->nom}} - Profile</title>
     <link rel="stylesheet" href="{{asset('css/Profile.css')}}">
+    <link rel="stylesheet" href="{{asset('css/post.css')}}">
 </head>
 <body>
     <header class="header">
@@ -41,7 +42,8 @@
                 </div>
                 </div>
             </div>
-            <div class="message-box" style="">
+            <div class="mesage-box" style="">
+                <h4>Your Articles</h4>
                 <div id="posts" style="width: 700px; padding:10px">
                     @if($articles->isEmpty())
                         <p>
@@ -50,51 +52,40 @@
                             on any Medium story to get started.
                         </p>
                     @else
-                    <div class="article-list">
-                        @foreach($articles as $article)
-                            <div class="article-card" style="text-align: start">
-                                <!-- Article Title -->
-                                <h2>{{ $article->titre }}</h2>
+                        @foreach ($articles as $article)
+                            <div class="article-cover">
+                                <!-- Title -->
+                                <h2>{{$article->titre}}</h2>
 
                                 <!-- Metadata -->
                                 <div class="meta">
                                     <span>
                                         State:
-                                        @if ($article->statut == 'Refusé')
+                                        @if ($article->statut == "Refusé")
                                             <span style="color: red">{{$article->statut}}</span>
-
-                                        @elseif ($article->statut == 'En cours')
-                                            <span style="color: gray">{{$article->statut}}</span>
-
-                                        @elseif ($article->statut == 'Retenu')
-                                            <span style="color: rgb(0, 183, 255)">{{$article->statut}}</span>
+                                        @elseif ($article->statut == "En cours")
+                                        <span style="color: grey">{{$article->statut}}</span>
+                                        @elseif ($article->statut == "Retenu")
+                                        <span style="color: rgb(10, 10, 207)">{{$article->statut}}</span>
                                         @else
-                                            <span style="color: green">{{$article->statut}}</span>
+                                        <span style="color: rgb(6, 101, 6)">{{$article->statut}}</span>
                                         @endif
-                                    </span><br>
-                                    <span>Date: {{ $article->created_at->format('M d, Y') }}</span>
+                                    </span>
+                                    <span>•</span>
+                                    <span>{{$article->created_at->format('M d, Y')}}</span>
+                                    <span>•</span>
+                                    <span>{{$article->theme->nom_theme}}</span>
                                 </div>
 
-                                <!-- Engagement Metrics -->
-                                <div class="engagement">
-                                    <span>1.1K Likes</span>
-                                    <span>32 Comments</span>
-                                </div>
-
-                                <!-- Actions -->
-                                <div class="actions">
-                                    <a >
-                                        <button>Update</button>
-                                    </a>
-                                    <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this post?')" >Delete</button>
-                                    </form>
-                                </div>
+                                <!-- Call-to-Action Button -->
+                                <a href="#" class="cta-button">Read Article</a>
+                                <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="delete-button" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this post?')" style="background-color: rgb(224, 11, 11);">Delete</button>
+                                </form>
                             </div>
                         @endforeach
-                    </div>
                     @endif
                 </div>
             </div>
