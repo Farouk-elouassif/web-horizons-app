@@ -264,10 +264,11 @@
     border-radius: 10px;
   }
 
-  .message-box p {
+  .msg {
     color: #555;
     font-size: 16px;
     line-height: 1.6;
+    margin-left: 250px;
   }
 
   .icon {

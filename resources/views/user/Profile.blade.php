@@ -46,11 +46,7 @@
                 <h4>Your Articles</h4>
                 <div id="posts" style="width: 700px; padding:10px">
                     @if($articles->isEmpty())
-                        <p>
-                            Add your favorite stories to your list. Simply click the
-                            <span class="icon">📌</span>
-                            on any Medium story to get started.
-                        </p>
+                        <p class="msg">You dont have any Artics yet</p>
                     @else
                         @foreach ($articles as $article)
                             <div class="article-cover">

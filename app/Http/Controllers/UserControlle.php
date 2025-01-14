@@ -37,7 +37,7 @@ class UserControlle extends Controller
         ]);
 
         // Redirect back with a success message
-        return redirect()->route('write.form')->with('success', 'Article created successfully!');
+        return redirect()->route('user.dashboard');
     }
 
     public function getArticles(){
