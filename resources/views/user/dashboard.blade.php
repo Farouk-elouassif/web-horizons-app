@@ -25,7 +25,7 @@
                         <h2>{{ $article->titre }}</h2>
                         <p>{{ $article->contenu }}</p>>
                         <small>Created at: {{ $article->created_at->format('Y-m-d H:i:s') }}</small>
-                         <!-- Delete Button -->
+                        <!-- Delete Button -->
                         <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')

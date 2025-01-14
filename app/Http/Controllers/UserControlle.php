@@ -30,7 +30,7 @@ class UserControlle extends Controller
         $article = Article::create([
             'titre' => $request->title,
             'contenu' => $request->article,
-            'statu' => false, // Default status
+            'statu' => 'En cours', // Default status
             'theme_id' => $request->theme,  // You can update this to dynamically assign a theme
             'user_id' => $user->id, // Associate the article with the logged-in user
             'date_proposition' => now(),
@@ -41,15 +41,17 @@ class UserControlle extends Controller
     }
 
     public function getArticles(){
-        // Get the currently authenticated user
-        $user = Auth::user();
+    // Get the currently authenticated user
+    $user = Auth::user();
 
-        // Fetch all articles created by the logged-in user
-        $articles = $user->articles;
+    // Fetch all articles created by the logged-in user with the required columns
+    $articles = $user->articles()
+        ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
+        ->get();
 
-        // Pass the articles to the view
-        return view('user.dashboard', compact('articles'));
-    }
+    // Pass the articles to the view
+    return view('user.Profile', compact('articles', 'user'));
+}
     public function deleteArticle($id){
         // Find the article by ID
         $article = Article::find($id);
@@ -57,10 +59,10 @@ class UserControlle extends Controller
         // Check if the article exists and belongs to the logged-in user
         if ($article && $article->user_id === Auth::id()) {
             $article->delete(); // Delete the article
-            return redirect()->route('user.dashboard')->with('success', 'Article deleted successfully!');
+            return redirect()->route('user.Profile')->with('success', 'Article deleted successfully!');
         }
 
         // If the article doesn't exist or doesn't belong to the user, redirect with an error message
-        return redirect()->route('user.dashboard')->with('error', 'Article not found or you do not have permission to delete it.');
+        return redirect()->route('user.Profile')->with('error', 'Article not found or you do not have permission to delete it.');
     }
 }

@@ -20,6 +20,18 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/profile', function () {
+    $user = Auth::user();
+
+    // Fetch all articles created by the logged-in user with the required columns
+    $articles = $user->articles()
+        ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
+        ->get();
+
+    // Pass the articles to the view
+    return view('user.Profile', compact('articles', 'user'));
+
+})->name('user.Profile');
 
 
 // Protect the routes with the 'auth' middleware
@@ -50,3 +62,5 @@ Route::get('/themes', function () {
 // Route to handle theme selection submission
 Route::post('/subscriptions', [AuthController::class, 'store'])->name('subscriptions.store');
 });
+
+

@@ -1,0 +1,402 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: rgb(236, 230, 224);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgb(236, 230, 224);
+    border-bottom: 1px solid #000000;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow:  0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  li{
+    padding: 0 8px;
+  }
+#input_search{
+    width: 300px;
+    padding: 10px ;
+    padding-right: 0;
+    border: 1px solid rgb(236, 230, 224);
+    border-radius: 18px;
+    font-size: 16px;
+}
+#input_search{
+    background-color:rgb(245, 242, 240) ;
+    outline: none;
+}
+#input_search:hover{
+    border-color: #000000;
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+}
+
+.logo a {
+    font-family: Palatino , URW Palladio L , serif ;
+    text-decoration: none;
+    padding-right: 14px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
+
+  .nav-links ul {
+    display: flex;
+    gap: 15px;
+    margin-top: 6px;
+    list-style: none;
+  }
+
+  .nav-links ul li a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #000;
+    transition: color 0.3s;
+  }
+
+  .nav-links ul li a:hover {
+    color: #8197b0;
+  }
+  .rightside{
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    justify-content: center;
+  }
+
+  .search-login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .signup-btn:hover{
+    background-color: #595959;
+  }
+
+
+  .search-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+
+  .search-bar {
+    display: none;
+  }
+
+  .search-bar input {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .btn {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    color: white;
+    background-color: #000000;
+    transition: background-color 0.3s;
+  }
+
+
+  .hamburger {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links ul {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+    }
+
+    .nav-links ul.show {
+      display: flex;
+    }
+
+    .hamburger {
+      display: block;
+    }
+  }
+  .bodypage{
+    display: flex;
+    flex-direction: row;
+  }
+  #insideLeft{
+    margin: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  .leftpage{
+    min-height: 60vh;
+    min-width: 60%;
+    justify-content: center;
+  }
+  .rightpage{
+    min-width: 40%;
+    min-height: 100vh;
+    border-left: 1px solid rgb(199, 199, 199);
+  }
+  .profile-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .profile-image {
+    width: 35px;
+    height: 35px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    margin-right: 15px;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+  }
+  #read{
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    margin-left: 12px;
+    padding-bottom: 14px;
+  }
+  .PostChoix{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    list-style: none;
+    justify-content: space-between;
+    height: 100% ;
+    border-top: 1px solid rgb(199, 199, 199);
+    padding: 12px;
+  }
+  .PostChoix ul li a{
+    text-decoration: none;
+    font-family: Arial, sans-serif  ;
+    font-size: 14px;
+    color: #000;
+    transition: color 0.3s;
+  }
+  .PostChoix ul li a:hover{
+    color: #777;
+  }
+  .PostChoix li a:hover{
+    color: #777;
+  }
+  .PostChoix li a{
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    transition: color 0.3s;
+  }
+  .PostChoix > ul {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    list-style: none;
+  }
+  .profile-date {
+    font-size: 14px;
+    color: #777;
+  }
+
+  .icon-lock {
+    font-size: 12px;
+  }
+  .message-box {
+    border: 1px dashed #ddd;
+    margin-left: 30px;
+    justify-items: center;
+    padding: 20px;
+    text-align: center;
+    max-width: 760px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .message-box p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .icon {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .secprofile-image{
+    width: 90px;
+    height: 90px;
+    background-color: #9b59b6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 15px;
+    margin-bottom: 20px;
+  }
+  .para{
+    font-size: xx-large;
+  }
+  .insideright{
+    margin: 40px;
+  }
+  .footer-links{
+    position: fixed;
+    bottom: 18px;
+    width:100% ;
+    border-top: 1px solid rgb(199, 199, 199);
+  }
+  .footer-links ul{
+    height: 20px;
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    margin-top: 18px;
+    margin-left: 140px;
+  }
+  .footer-links ul li a{
+    text-decoration: none;
+    color: #a4a4a4;
+    font-size: small;
+    transition: color 0.3s;
+  }
+  .footer-links ul li a:hover{
+    color:#515151 ;
+  }
+  .article-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.article-card h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.article-card .meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.article-card .meta span {
+    margin-right: 10px;
+}
+
+.article-card .engagement {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.article-card .engagement span {
+    margin-right: 15px;
+}
+
+.article-card .actions {
+    display: flex;
+    gap: 10px;
+}
+
+.article-card .actions button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.article-card .actions button:hover {
+    background-color: #333;
+}
+
+.article-card .actions .delete-button {
+    background-color: #cc0000;
+}
+
+.article-card .actions .delete-button:hover {
+    background-color: #990000;
+}
+

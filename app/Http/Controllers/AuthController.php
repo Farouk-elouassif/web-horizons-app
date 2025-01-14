@@ -35,9 +35,8 @@ class AuthController extends Controller
                 return redirect()->route('admin.dashboard')->with('success', 'Welcome, ' . $user->first_name . '!');
             } elseif ($user->role === 'Abonné') {
                 return redirect()->route('user.dashboard')->with('success', 'Welcome, ' . $user->first_name . '!');
-            } else {
-                return redirect()->route('home')->with('success', 'Welcome, ' . $user->first_name . '!');
             }
+
         }
 
         // If login fails, redirect back with errors
