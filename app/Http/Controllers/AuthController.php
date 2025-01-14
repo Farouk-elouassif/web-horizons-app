@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -45,8 +46,8 @@ class AuthController extends Controller
 
 
     }
-    public function register(Request $request)
-    {
+
+    public function register(Request $request){
         // Validate the request
         $request->validate([
             'first_name' => 'required|string|max:255', // Validate first name
@@ -71,7 +72,7 @@ class AuthController extends Controller
         auth()->login($user);
 
         // Redirect to the user dashboard
-        return redirect()->route('user.dashboard')->with('success', 'Welcome, ' . $user->nom . '!');
+        return redirect()->route('themes');
     }
 
     function logout(Request $request){
@@ -79,5 +80,30 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect(route("login"));
+    }
+
+    public function store(Request $request){
+        // Validate the request
+        $request->validate([
+            'themes' => 'required|string', // Themes are sent as a comma-separated string
+        ]);
+
+        // Get the authenticated user's ID
+        $user = Auth::user();
+
+        // Split the comma-separated string into an array of theme IDs
+        $themeIds = explode(',', $request->themes);
+
+        // Loop through the selected theme IDs and store them in the database
+        foreach ($themeIds as $themeId) {
+            Subscription::create([
+                'date_abonnement' => now(),
+                'user_id' => $user->id,
+                'theme_id' => $themeId,
+            ]);
+        }
+
+        // Redirect or return a response
+        return redirect()->route('user.dashboard');
     }
 }

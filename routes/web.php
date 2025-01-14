@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserControlle;
+use App\Models\Theme;
+
 
 // login form
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -19,6 +21,7 @@ Route::get('/', function () {
     return view('home');
 });
 
+
 // Protect the routes with the 'auth' middleware
 Route::middleware('auth')->group(function () {
     // User dashboard route
@@ -34,4 +37,16 @@ Route::middleware('auth')->group(function () {
     // Create post routes
     Route::get('/createPoste', [UserControlle::class, 'showCreatePoste'])->name('createPoste.form');
     Route::post('/createPoste', [UserControlle::class, 'createPoste'])->name('createPoste.submit');
+
+    Route::get('/themes', function () {
+        return view('auth.themes');
+    });
+// Route to display the themes page
+Route::get('/themes', function () {
+    $themes = Theme::all(); // Fetch all themes from the database
+    return view('auth.themes', compact('themes'));
+})->name('themes');
+
+// Route to handle theme selection submission
+Route::post('/subscriptions', [AuthController::class, 'store'])->name('subscriptions.store');
 });
