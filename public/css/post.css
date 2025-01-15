@@ -50,7 +50,7 @@ h4 {
 /* Call-to-Action Button */
 .article-cover .cta-button,.article-cover form  .delete-button {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 6px 12px;
     background-color: #000;
     color: #fff;
     text-decoration: none;
