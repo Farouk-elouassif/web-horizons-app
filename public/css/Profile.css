@@ -328,76 +328,75 @@
     margin: 0 auto;
 }
 
-.article-card {
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 20px;
-    transition: transform 0.2s, box-shadow 0.2s;
+
+
+.delete-button {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: rgb(226, 6, 6);
     cursor: pointer;
 }
 
-.article-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.delete-button:hover{
+    color: red;
 }
 
-.article-card h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #000;
+.articles {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-left: 20px;
 }
 
-.article-card .meta {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 10px;
+.article {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
 }
 
-.article-card .meta span {
-    margin-right: 10px;
+.article:last-child {
+    border-bottom: none;
 }
 
-.article-card .engagement {
+.article-meta {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
     font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 10px;
 }
 
-.article-card .engagement span {
-    margin-right: 15px;
+.article-author {
+    color: #000;
+    font-weight: 400;
+    text-decoration: none;
 }
 
-.article-card .actions {
+.article-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #000;
+    text-decoration: none;
+    line-height: 1.1;
+}
+
+.article-title:hover {
+    text-decoration: underline;
+}
+
+.article-excerpt {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.article-footer {
     display: flex;
-    gap: 10px;
-}
-
-.article-card .actions button {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(0, 0, 0, 0.6);
     font-size: 0.9rem;
-    transition: background-color 0.2s;
 }
-
-.article-card .actions button:hover {
-    background-color: #333;
-}
-
-.article-card .actions form .delete-button {
-    background-color: #cc0000;
-}
-
-.article-card .actions form .delete-button:hover {
-    background-color: #990000;
-}
-

@@ -62,5 +62,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/invited', [invitedController::class, 'show'])->name('invited');
+Route::get('/article/{id}', [UserControlle::class, 'showArticlePage'])->name('article.show');
 
 

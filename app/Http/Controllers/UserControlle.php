@@ -41,17 +41,18 @@ class UserControlle extends Controller
     }
 
     public function getArticles(){
-    // Get the currently authenticated user
-    $user = Auth::user();
+        // Get the currently authenticated user
+        $user = Auth::user();
 
-    // Fetch all articles created by the logged-in user with the required columns
-    $articles = $user->articles()
-        ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
-        ->get();
+        // Fetch all articles created by the logged-in user with the required columns
+        $articles = $user->articles()
+            ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
+            ->get();
 
-    // Pass the articles to the view
-    return view('user.profile', compact('articles', 'user'));
-}
+        // Pass the articles to the view
+        return view('user.profile', compact('articles', 'user'));
+    }
+
     public function deleteArticle($id){
         // Find the article by ID
         $article = Article::find($id);
@@ -59,10 +60,19 @@ class UserControlle extends Controller
         // Check if the article exists and belongs to the logged-in user
         if ($article && $article->user_id === Auth::id()) {
             $article->delete(); // Delete the article
-            return redirect()->route('user.profile')->with('success', 'Article deleted successfully!');
+            return redirect()->route('user.dashboard')->with('success', 'Article deleted successfully!');
         }
 
         // If the article doesn't exist or doesn't belong to the user, redirect with an error message
-        return redirect()->route('user.profile')->with('error', 'Article not found or you do not have permission to delete it.');
+        return redirect()->route('user.dashboard')->with('error', 'Article not found or you do not have permission to delete it.');
+    }
+
+    public function showArticlePage($id){
+        // Find the article by ID
+        $article = Article::findOrFail($id);
+        $user = Auth::user();
+
+        // Pass the article to the view
+        return view('user.article', compact('article', 'user'));
     }
 }

@@ -10,7 +10,7 @@
 <body>
     <header class="header">
         <div class="logo">
-            <a href="#">Tech Horizons</a>
+            <a href="">Tech Horizons</a>
             <input type="search" name="" id="input_search" placeholder="Search">
         </div>
         <div class="rightside">
@@ -23,7 +23,7 @@
             </nav>
             <div class="search-login">
                 <div class="profile-image">
-                    <span class="profile-initial">{{$user->nom[0]}}</span>
+                    <span class="profile-initial">{{strtoupper($user->nom[0])}}</span>
                 </div>
             </div>
             <button class="hamburger" onclick="toggleMenu()">☰</button>
@@ -34,7 +34,7 @@
             <div id="insideLeft">
                 <div class="profile-card">
                     <div class="profile-image">
-                        <span class="profile-initial">{{$user->nom[0]}}</span>
+                        <span class="profile-initial">{{strtoupper($user->nom[0])}}</span>
                     </div>
                 <div class="profile-info">
                     <h2 class="profile-name">{{$user->nom}}</h2>
@@ -48,13 +48,20 @@
                     @if($articles->isEmpty())
                         <p class="msg">You dont have any Artics yet</p>
                     @else
+                    <div class="articles">
                         @foreach ($articles as $article)
-                            <div class="article-cover">
-                                <!-- Title -->
-                                <h2>{{$article->titre}}</h2>
-
-                                <!-- Metadata -->
-                                <div class="meta">
+                            <article class="article">
+                                <div class="article-meta">
+                                    <span ><strong>In</strong></span>
+                                    <a href="#" class="article-author">{{ optional($article->theme)->nom_theme ?? 'Uncategorized' }}</a>
+                                </div>
+                                <a href="{{ route('article.show', $article->id) }}" class="article-title">{{ $article->titre }}</a>
+                                <p class="article-excerpt">{{ Str::limit($article->contenu, 150)}}</p>
+                                <div class="article-footer">
+                                    <span>{{$article->created_at->format('M d, Y')}}</span>
+                                    <span>·</span>
+                                    <span>{{ $article->read_time ?? '5' }} min read</span>
+                                    <span>·</span>
                                     <span>
                                         State:
                                         @if ($article->statut == "Refusé")
@@ -67,21 +74,21 @@
                                         <span style="color: rgb(6, 101, 6)">{{$article->statut}}</span>
                                         @endif
                                     </span>
-                                    <span>•</span>
-                                    <span>{{$article->created_at->format('M d, Y')}}</span>
-                                    <span>•</span>
-                                    <span>{{$article->theme->nom_theme}}</span>
+                                    <span>·</span>
+                                    <span>
+                                        <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-button" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                        </form>
+                                    </span>
                                 </div>
-
-                                <!-- Call-to-Action Button -->
-                                <a href="#" class="cta-button">Read Article</a>
-                                <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="delete-button" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this post?')" style="background-color: rgb(224, 11, 11);">Delete</button>
-                                </form>
-                            </div>
+                            </article>
                         @endforeach
+
+
+
+                    </div>
                     @endif
                 </div>
             </div>
