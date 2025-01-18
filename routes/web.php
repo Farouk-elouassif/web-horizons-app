@@ -20,9 +20,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/home', function () {
-    return view('home2');
-});
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
 
 Route::get('/write', function () {
     return view('user.write');

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Horizons - Topics</title>
+  <title>Topics</title>
   <link rel="stylesheet" href="{{asset('css/topics.css')}}">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -16,8 +16,8 @@
         <div class="rightside">
             <nav class="nav-links">
                 <ul>
-                    <li><a href="">Topics</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="{{route("topics")}}">Topics</a></li>
+                    <li><a href="{{route("about")}}" target="_blank">About</a></li>
                     <li><a href="{{route("login")}}" class="login-btn">Sign In</a></li>
                 </ul>
             </nav>

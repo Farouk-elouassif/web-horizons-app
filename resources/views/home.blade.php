@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Horizons</title>
+    <title>Home</title>
     <link rel="icon" type="image/jpeg" href="{{ asset('favicon.jpeg') }}">
     <link rel="stylesheet" href="{{asset("css/home.css")}}">
 </head>
@@ -16,7 +16,7 @@
             <nav class="nav-links">
                 <ul>
                     <li><a href="{{route("topics")}}" target="_blank">Topics</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="{{route("about")}}" target="_blank">About</a></li>
                     <li><a href="{{route("login")}}" class="login-btn">Sign In</a></li>
                 </ul>
             </nav>
