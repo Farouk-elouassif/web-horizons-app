@@ -6,6 +6,7 @@ use App\Http\Controllers\invitedController;
 use App\Models\Theme;
 
 
+
 // login form
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
@@ -63,5 +64,5 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/invited', [invitedController::class, 'show'])->name('invited');
 Route::get('/article/{id}', [UserControlle::class, 'showArticlePage'])->name('article.show');
-
+Route::get('/user/articles', [UserControlle::class, 'showUserHomePage'])->name('user.articles');
 

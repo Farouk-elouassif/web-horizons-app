@@ -75,4 +75,24 @@ class UserControlle extends Controller
         // Pass the article to the view
         return view('user.article', compact('article', 'user'));
     }
+
+    public function showUserHomePage(){
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Fetch the user's subscribed themes using the correct relationship
+        $subscribedThemes = $user->subscribedThemes;
+
+        // Check if the user has subscribed themes
+        if ($subscribedThemes->isEmpty()) {
+            return view('user.articles', ['articles' => []]);
+        }
+
+        // Fetch articles related to the subscribed themes
+        $articles = Article::whereIn('theme_id', $subscribedThemes->pluck('id'))
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+            return view('user.homePageUser', compact('articles', 'user'));
+    }
 }

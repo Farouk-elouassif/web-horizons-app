@@ -17,7 +17,7 @@
                     <p>Stories & Ideas</p>
                 </div>
             <p id="parag">A place to read, write, and deepen your understanding</p>
-            <a href="{{route("register")}}" class="secbtn signup-btn">Start Reading</a>
+            <a href="{{route("invited")}}" class="secbtn signup-btn">Start Reading</a>
         </div>
     </div>
     <footer>

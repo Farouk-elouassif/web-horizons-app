@@ -1,16 +1,13 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/homePageUserInvite.css')}}">
     <title>Tech Horizons</title>
-    <style>
-
-    </style>
 </head>
 <body>
-    @include("home_header")
+    @include("user.profile_header")
 
     <nav class="nav-topics">
         <div class="topics-list">
