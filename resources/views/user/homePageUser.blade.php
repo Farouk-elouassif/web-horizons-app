@@ -30,7 +30,7 @@
                         <span>in</span>
                         <a href="#" class="article-author">{{ optional($article->theme)->nom_theme ?? 'Uncategorized' }}</a>
                     </div>
-                    <a href="{{ route('login', $article->id) }}" class="article-title">{{ $article->titre }}</a>
+                    <a href="{{ route('article.show', $article->id) }}" class="article-title">{{ $article->titre }}</a>
                     <p class="article-excerpt">{{ Str::limit($article->contenu, 150)}}</p>
                     <div class="article-footer">
                         <span>{{$article->created_at->format('M d, Y')}}</span>

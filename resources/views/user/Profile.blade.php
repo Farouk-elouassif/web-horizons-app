@@ -13,7 +13,7 @@
         <div class="leftpage">
             <div id="insideLeft">
                 <div class="profile-card">
-                    <div class="profile-image">
+                    <div class="profile-img">
                         <span class="profile-initial">{{strtoupper($user->nom[0])}}</span>
                     </div>
                 <div class="profile-info">

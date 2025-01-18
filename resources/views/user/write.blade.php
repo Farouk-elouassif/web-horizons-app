@@ -7,21 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/write.css') }}">
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <a href="#">Tech Horizons</a>
-        </div>
-        <div class="rightside">
-            <nav class="nav-links">
-                <ul>
-                    <li><a href="#">Notifications</a></li>
-                </ul>
-            </nav>
-            <div class="search-login">
-                <a href="{{route('user.dashboard')}}" class="btn signup-btn">Profile</a>
-            </div>
-        </div>
-    </header>
+    @include('user.profile_header')
     <form action="{{ route('write.submit') }}" method="POST">
         @csrf
         <div class="editor-container">

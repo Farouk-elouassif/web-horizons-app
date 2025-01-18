@@ -16,6 +16,7 @@
         <div class="rightside">
             <nav class="nav-links">
                 <ul>
+                    <li><a href="{{route('user.articles')}}">Home</a></li>
                     <li><a href="{{route('write.form')}}" target="_blank">Write</a></li>
                     <li><a href="#">Notifications</a></li>
                     <li><a href="#">Conversations</a></li>
@@ -23,7 +24,7 @@
             </nav>
             <div class="search-login">
                 <div class="profile-image">
-                    <span class="profile-initial">{{strtoupper($user->nom[0])}}</span>
+                    <span class="profile-initial"><a href="{{route('user.dashboard')}}">{{strtoupper($user->nom[0])}}</a></span>
                 </div>
             </div>
             <button class="hamburger" onclick="toggleMenu()">☰</button>

@@ -117,7 +117,7 @@ li{
     cursor: pointer;
 }
 
-.profile-image {
+.profile-image a {
     width: 35px;
     height: 35px;
     background-color: black;
@@ -129,4 +129,5 @@ li{
     font-size: 16px;
     font-weight: 300;
     margin-right: 15px;
+    text-decoration: none;
 }

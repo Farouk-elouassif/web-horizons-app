@@ -11,8 +11,9 @@ class UserControlle extends Controller
 {
     // Show the form to create a post
     public function showCreatePoste(){
+        $user = Auth::user();
         $themes = Theme::all();
-        return view("user.write", compact('themes'));
+        return view("user.write", compact('themes', 'user'));
     }
 
     // Handle the form submission to create a post
