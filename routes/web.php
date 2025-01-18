@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserControlle;
+use App\Http\Controllers\invitedController;
 use App\Models\Theme;
 
 
@@ -17,34 +18,19 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // home route
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/', function () {return view('home');});
+// about route
+Route::get('/about', function () {return view('about');})->name('about');
 
-Route::get('/write', function () {
-    return view('user.write');
-});
+Route::get('/write', function () {return view('user.write');});
 
+// tpics route
 Route::get('/topics', function () {
     $themes = Theme::all();
     return view('topics', compact('themes'));
 })->name('topics');
 
-Route::get('/profile', function () {
-    $user = Auth::user();
 
-    // Fetch all articles created by the logged-in user with the required columns
-    $articles = $user->articles()
-        ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
-        ->get();
-
-    // Pass the articles to the view
-    return view('user.profile', compact('articles', 'user'));
-
-})->name('user.profile');
 
 
 // Protect the routes with the 'auth' middleware
@@ -57,23 +43,24 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard'); // Admin dashboard view
     })->name('admin.dashboard');
 
+    // delete post route
     Route::delete('/article/delete/{id}', [UserControlle::class, 'deleteArticle'])->name('article.delete');
 
     // Create post routes
     Route::get('/user/write', [UserControlle::class, 'showCreatePoste'])->name('write.form');
     Route::post('/user/write', [UserControlle::class, 'createPoste'])->name('write.submit');
 
-    Route::get('/themes', function () {
-        return view('auth.themes');
-    });
-// Route to display the themes page
-Route::get('/themes', function () {
-    $themes = Theme::all(); // Fetch all themes from the database
-    return view('auth.themes', compact('themes'));
-})->name('themes');
 
-// Route to handle theme selection submission
-Route::post('/subscriptions', [AuthController::class, 'store'])->name('subscriptions.store');
+    // Route to display the themes page
+    Route::get('/themes', function () {
+        $themes = Theme::all(); // Fetch all themes from the database
+        return view('auth.themes', compact('themes'));
+    })->name('themes');
+
+    // Route to handle theme selection submission
+    Route::post('/subscriptions', [AuthController::class, 'store'])->name('subscriptions.store');
 });
+
+Route::get('/invited', [invitedController::class, 'show'])->name('invited');
 
 

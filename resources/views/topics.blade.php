@@ -9,24 +9,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            <a href="#">Tech Horizons</a>
-        </div>
-        <div class="rightside">
-            <nav class="nav-links">
-                <ul>
-                    <li><a href="{{route("topics")}}">Topics</a></li>
-                    <li><a href="{{route("about")}}" target="_blank">About</a></li>
-                    <li><a href="{{route("login")}}" class="login-btn">Sign In</a></li>
-                </ul>
-            </nav>
-            <div class="search-login">
-                <a href="{{route("register")}}" class="btn signup-btn">Get started</a>
-            </div>
-            <button class="hamburger" onclick="toggleMenu()">☰</button>
-        </div>
-    </header>
+    @include('home_header')
 
     <!-- Topics Section -->
     <section class="topics">

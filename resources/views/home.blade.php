@@ -8,24 +8,7 @@
     <link rel="stylesheet" href="{{asset("css/home.css")}}">
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <a href="#">Tech Horizons</a>
-        </div>
-        <div class="rightside">
-            <nav class="nav-links">
-                <ul>
-                    <li><a href="{{route("topics")}}" target="_blank">Topics</a></li>
-                    <li><a href="{{route("about")}}" target="_blank">About</a></li>
-                    <li><a href="{{route("login")}}" class="login-btn">Sign In</a></li>
-                </ul>
-            </nav>
-            <div class="search-login">
-                <a href="{{route("register")}}" class="btn signup-btn">Get started</a>
-            </div>
-            <button class="hamburger" onclick="toggleMenu()">☰</button>
-        </div>
-    </header>
+    @include('home_header')
     <div class="bodyPage">
         <div id="backgim">
             <div class="bodyContent">
