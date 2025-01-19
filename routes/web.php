@@ -19,7 +19,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // home route
-Route::get('/', function () {return view('home');});
+Route::get('/', function () {return view('home');})->name('home');
 // about route
 Route::get('/about', function () {return view('about');})->name('about');
 

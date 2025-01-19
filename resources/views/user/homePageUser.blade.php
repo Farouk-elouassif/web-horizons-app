@@ -69,12 +69,6 @@
             @foreach ($subscribedThemes as $subscribedTheme)
                 <a href="#" class="topic-link" data-topic="{{$subscribedTheme->nom_theme}}">{{$subscribedTheme->nom_theme}}</a>
             @endforeach
-            {{-- <a href="#" class="topic-link" data-topic="Artificial Intelligence">Artificial Intelligence</a>
-            <a href="#" class="topic-link" data-topic="Web Development">Web Development</a>
-            <a href="#" class="topic-link" data-topic="Programming">Programming</a>
-            <a href="#" class="topic-link" data-topic="Data Science">Data Science</a>
-            <a href="#" class="topic-link" data-topic="Cybersecurity">Cybersecurity</a>
-            <a href="#" class="topic-link" data-topic="Tech News">Tech News</a> --}}
         </div>
     </nav>
 
