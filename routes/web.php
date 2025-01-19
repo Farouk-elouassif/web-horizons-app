@@ -66,8 +66,5 @@ Route::get('/invited', [invitedController::class, 'show'])->name('invited');
 Route::get('/article/{id}', [UserControlle::class, 'showArticlePage'])->name('article.show');
 Route::get('/user/articles', [UserControlle::class, 'showUserHomePage'])->name('user.articles');
 
-Route::get('user/analytics', function(){
-    $user = Auth::user();
-    return view('user.analytics', compact('user'));
-});
+Route::get('user/analytics', [UserControlle::class, 'showAnalytics'])->name('user.analytics');
 

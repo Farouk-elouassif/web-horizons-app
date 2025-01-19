@@ -16,11 +16,11 @@ class Subscription extends Model
     // Subscription belongs to a user
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);   
     }
 
     // Subscription belongs to a theme
-    public function theme(): BelongsTo
+    public function theme(): BelongsTo  
     {
         return $this->belongsTo(Theme::class);
     }

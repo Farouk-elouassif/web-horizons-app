@@ -11,20 +11,23 @@
 
     <nav class="nav-topics">
         <div class="topics-list">
-            <a href="#" class="topic-link active">All</a>
-            <a href="#" class="topic-link">Artificial Intelligence</a>
-            <a href="#" class="topic-link">Web Development</a>
-            <a href="#" class="topic-link">Programming</a>
-            <a href="#" class="topic-link">Data Science</a>
-            <a href="#" class="topic-link">Cybersecurity</a>
-            <a href="#" class="topic-link">Tech News</a>
+            <a href="#" class="topic-link active" data-topic="all">All</a>
+            @foreach ($subscribedThemes as $subscribedTheme)
+                <a href="#" class="topic-link" data-topic="{{$subscribedTheme->nom_theme}}">{{$subscribedTheme->nom_theme}}</a>
+            @endforeach
+            {{-- <a href="#" class="topic-link" data-topic="Artificial Intelligence">Artificial Intelligence</a>
+            <a href="#" class="topic-link" data-topic="Web Development">Web Development</a>
+            <a href="#" class="topic-link" data-topic="Programming">Programming</a>
+            <a href="#" class="topic-link" data-topic="Data Science">Data Science</a>
+            <a href="#" class="topic-link" data-topic="Cybersecurity">Cybersecurity</a>
+            <a href="#" class="topic-link" data-topic="Tech News">Tech News</a> --}}
         </div>
     </nav>
 
     <main class="main-content">
         <div class="articles">
             @foreach ($articles as $article)
-                <article class="article">
+                <article class="article" data-topic="{{ optional($article->theme)->nom_theme ?? 'Uncategorized' }}">
                     <div class="article-meta">
                         <a href="#" class="article-author">{{ optional($article->author)->nom ?? 'Unknown Author' }}</a>
                         <span>in</span>
@@ -39,11 +42,37 @@
                     </div>
                 </article>
             @endforeach
-
-
-
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicLinks = document.querySelectorAll('.topic-link');
+            const articles = document.querySelectorAll('.article');
+
+            topicLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    // Remove active class from all links
+                    topicLinks.forEach(link => link.classList.remove('active'));
+                    // Add active class to the clicked link
+                    this.classList.add('active');
+
+                    const selectedTopic = this.getAttribute('data-topic');
+
+                    articles.forEach(article => {
+                        const articleTopic = article.getAttribute('data-topic');
+
+                        if (selectedTopic === 'all' || articleTopic === selectedTopic) {
+                            article.style.display = 'block';
+                        } else {
+                            article.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-

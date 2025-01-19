@@ -84,6 +84,7 @@ class UserControlle extends Controller
         // Fetch the user's subscribed themes using the correct relationship
         $subscribedThemes = $user->subscribedThemes;
 
+
         // Check if the user has subscribed themes
         if ($subscribedThemes->isEmpty()) {
             return view('user.articles', ['articles' => []]);
@@ -94,6 +95,20 @@ class UserControlle extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-            return view('user.homePageUser', compact('articles', 'user'));
+            
+
+            return view('user.homePageUser', compact('articles', 'user', 'subscribedThemes'));
+    }
+
+
+
+    public function showAnalytics(){
+        $user = Auth::user();
+
+        $articles = $user->articles()
+            ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
+            ->get();
+
+        return view('user.analytics', compact('user', 'articles'));
     }
 }

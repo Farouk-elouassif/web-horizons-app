@@ -18,7 +18,7 @@
                 <ul>
                     <li><a href="{{route('user.articles')}}">Home</a></li>
                     <li><a href="{{route('write.form')}}" target="_blank">Write</a></li>
-                    <li><a href="#">Notifications</a></li>
+                    <li><a href="{{route('user.analytics')}}">Dashboard</a></li>
                     <li><a href="#">Conversations</a></li>
                 </ul>
             </nav>

@@ -32,9 +32,9 @@ class AuthController extends Controller
 
             // Redirect based on the user's role
             if ($user->role === 'Éditeur') {
-                return redirect()->route('admin.dashboard')->with('success', 'Welcome, ' . $user->first_name . '!');
+                return redirect()->route('admin.dashboard');
             } elseif ($user->role === 'Abonné') {
-                return redirect()->route('user.dashboard')->with('success', 'Welcome, ' . $user->first_name . '!');
+                return redirect()->route('user.articles');
             }
 
         }

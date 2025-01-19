@@ -2,23 +2,26 @@
 namespace Database\Seeders;
 use App\Models\Article;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class ArticleSeeder extends Seeder
 {
     public function run()
     {
-        Article::create([
-            'title' => 'Introduction to Laravel', // Titre
-            'content' => 'Laravel is a PHP framework...', // Content
-            'publication_date' => now(), // DatePublication
-            'status' => 'published', // Etat
-        ]);
+        $faker = Faker::create();
 
-        Article::create([
-            'title' => 'Advanced Laravel Techniques',
-            'content' => 'In this article, we will explore...',
-            'publication_date' => now(),
-            'status' => 'draft',
-        ]);
+        $themes = ['AI', 'IoT', 'Cloud Computing', 'Cybersecurity', 'Blockchain', 'Big Data', 'Machine Learning', 'Edge Computing', 'Quantum Computing', '5G Technology'];
+
+        for ($i = 0; $i < 30; $i++) {
+            DB::table('articles')->insert([
+                'titre' => $faker->sentence(6),
+                'contenu' => $faker->paragraphs(3, true),
+                'statut' => $faker->randomElement(['Refusé', 'En cours', 'Retenu', 'Publié']),
+                'date_proposition' => $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'),
+                'theme_id' => $faker->numberBetween(6, 14),
+                'user_id' => $faker->numberBetween(21, 24),
+            ]);
+        }
     }
 }
