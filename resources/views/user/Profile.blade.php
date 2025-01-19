@@ -7,60 +7,115 @@
     <link rel="stylesheet" href="{{asset('css/Profile.css')}}">
     <link rel="stylesheet" href="{{asset('css/post.css')}}">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
         .quick-actions {
+            width: 450px;
             background: rgb(236, 230, 224);
             border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+            padding: 16px;
             position: fixed;
-            width: 35%
+            height: 350px;
         }
 
-        .quick-actions h3 {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 16px;
-            color: #292929;
-            margin: 0 0 15px 0;
+        .quick-actions-header {
+            padding: 4px 8px 16px 8px;
         }
 
-        .action-button {
+        .quick-actions-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .primary-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .primary-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .primary-action-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .separator {
+            height: 1px;
+            background: #e5e5e5;
+            margin: 16px 0;
+        }
+
+        .secondary-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .action-btn {
             display: flex;
             align-items: center;
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 8px;
+            gap: 8px;
+            padding: 8px;
+            background: transparent;
             border: none;
-            border-radius: 4px;
-            background: #f8f8f8;
+            border-radius: 6px;
             cursor: pointer;
+            width: 100%;
             text-align: left;
-            color: #292929;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 14px;
-            transition: background 0.2s ease;
+            color: #1a1a1a;
+            font-size: 0.875rem;
         }
 
-        .action-button:last-child {
-            margin-bottom: 0;
+        .action-btn:hover {
+            background: #f5f5f5;
         }
 
-        .action-button:hover {
-            background: #f0f0f0;
+        .sign-out-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+            font-size: 0.875rem;
         }
 
-        .action-button i {
-            margin-right: 12px;
-            color: #757575;
-            font-size: 16px;
+        .sign-out-btn:hover {
+            background: #dc2626;
+        }
+
+        .icon {
             width: 20px;
-            text-align: center;
+            height: 20px;
         }
 
-        .action-divider {
-            height: 1px;
-            background: #e6e6e6;
-            margin: 12px 0;
+        .secondary-icon {
+            width: 16px;
+            height: 16px;
         }
     </style>
 </head>
@@ -133,33 +188,66 @@
         <div class="rightpage">
         <div class="insideright">
             <div class="quick-actions">
-                <h3>Quick Actions</h3>
-                <button class="action-button">
-                    <i class="fas fa-edit"></i>
-                    New Story
-                </button>
-                <button class="action-button">
-                    <i class="fas fa-cog"></i>
-                    Account Settings
-                </button>
-                <button class="action-button">
-                    <i class="fas fa-bookmark"></i>
-                    Saved Stories
-                </button>
-                <div class="action-divider"></div>
-                <button class="action-button">
-                    <i class="fas fa-chart-line"></i>
-                    Stats & Analytics
-                </button>
-                <button class="action-button">
-                    <i class="fas fa-users"></i>
-                    Manage Followers
-                </button>
-                <div class="action-divider"></div>
-                <button class="action-button">
-                    <i class="fas fa-moon"></i>
-                    Dark Mode
-                </button>
+                <div class="quick-actions-header">
+                    <h2 class="quick-actions-title">Quick Actions</h2>
+                </div>
+
+                <div class="primary-actions">
+                    <button class="primary-action-btn">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                        <span style="font-size: 0.75rem; margin-top: 4px;">New Story</span>
+                    </button>
+                    <button class="primary-action-btn">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        <span style="font-size: 0.75rem; margin-top: 4px;">My Stories</span>
+                    </button>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="secondary-actions">
+                    <button class="action-btn">
+                        <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                        </svg>
+                        Notifications
+                    </button>
+                    <button class="action-btn">
+                        <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                        </svg>
+                        Reading List
+                    </button>
+                    <button class="action-btn">
+                        <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                        </svg>
+                        Share Profile
+                    </button>
+                    <button class="action-btn">
+                        <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        Settings
+                    </button>
+                </div>
+
+                <div class="separator"></div>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+
+                        <button type="submit" class="sign-out-btn">
+                            <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                            Sign Out
+                        </button>
+                    </form>
             </div>
         </div>
         <footer class="footer-links">
