@@ -6,6 +6,63 @@
     <title>{{$user->nom}} - Profile</title>
     <link rel="stylesheet" href="{{asset('css/Profile.css')}}">
     <link rel="stylesheet" href="{{asset('css/post.css')}}">
+    <style>
+        .quick-actions {
+            background: rgb(236, 230, 224);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: fixed;
+            width: 35%
+        }
+
+        .quick-actions h3 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 16px;
+            color: #292929;
+            margin: 0 0 15px 0;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 4px;
+            background: #f8f8f8;
+            cursor: pointer;
+            text-align: left;
+            color: #292929;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+
+        .action-button:last-child {
+            margin-bottom: 0;
+        }
+
+        .action-button:hover {
+            background: #f0f0f0;
+        }
+
+        .action-button i {
+            margin-right: 12px;
+            color: #757575;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .action-divider {
+            height: 1px;
+            background: #e6e6e6;
+            margin: 12px 0;
+        }
+    </style>
 </head>
 <body>
     @include('user.profile_header')
@@ -75,7 +132,34 @@
         </div>
         <div class="rightpage">
         <div class="insideright">
-            <div class="secprofile-info">
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <button class="action-button">
+                    <i class="fas fa-edit"></i>
+                    New Story
+                </button>
+                <button class="action-button">
+                    <i class="fas fa-cog"></i>
+                    Account Settings
+                </button>
+                <button class="action-button">
+                    <i class="fas fa-bookmark"></i>
+                    Saved Stories
+                </button>
+                <div class="action-divider"></div>
+                <button class="action-button">
+                    <i class="fas fa-chart-line"></i>
+                    Stats & Analytics
+                </button>
+                <button class="action-button">
+                    <i class="fas fa-users"></i>
+                    Manage Followers
+                </button>
+                <div class="action-divider"></div>
+                <button class="action-button">
+                    <i class="fas fa-moon"></i>
+                    Dark Mode
+                </button>
             </div>
         </div>
         <footer class="footer-links">

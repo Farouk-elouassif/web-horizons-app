@@ -7,8 +7,7 @@ use App\Models\Article;
 use App\Models\Theme;
 use Illuminate\Support\Facades\Auth;
 
-class UserControlle extends Controller
-{
+class UserControlle extends Controller {
     // Show the form to create a post
     public function showCreatePoste(){
         $user = Auth::user();
@@ -94,21 +93,15 @@ class UserControlle extends Controller
         $articles = Article::whereIn('theme_id', $subscribedThemes->pluck('id'))
             ->orderBy('created_at', 'desc')
             ->get();
-
-            
-
             return view('user.homePageUser', compact('articles', 'user', 'subscribedThemes'));
     }
 
-
-
     public function showAnalytics(){
         $user = Auth::user();
-
+        $subscribedThemes = $user->subscribedThemes;
         $articles = $user->articles()
             ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
             ->get();
-
-        return view('user.analytics', compact('user', 'articles'));
+        return view('user.analytics', compact('user', 'articles', 'subscribedThemes'));
     }
 }

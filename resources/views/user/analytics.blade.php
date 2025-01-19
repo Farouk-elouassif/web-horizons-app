@@ -16,22 +16,18 @@
             <div class="stat-card">
                 <h3>Total Views</h3>
                 <div class="number">23,578</div>
-                <div class="trend">↑ 12% this month</div>
             </div>
             <div class="stat-card">
                 <h3>Topics Followed</h3>
-                <div class="number">1,245</div>
-                <div class="trend">↑ 8% this month</div>
+                <div class="number">{{count($subscribedThemes)}}</div>
             </div>
             <div class="stat-card">
                 <h3>Total Articles</h3>
-                <div class="number">42</div>
-                <div class="trend">+3 this month</div>
+                <div class="number">{{count($articles)}}</div>
             </div>
             <div class="stat-card">
-                <h3>Engagement Rate</h3>
-                <div class="number">5.7%</div>
-                <div class="trend negative">↓ 2% this month</div>
+                <h3>Average Notes</h3>
+                <div class="number">5.7</div>
             </div>
         </div>
 
@@ -50,37 +46,22 @@
 
                 <div class="topics-section">
                     <div class="topics-header">
-                        <h2>Topics You Follow <span class="topic-count">(8)</span></h2>
+                        <h2>Topics You Follow <span class="topic-count">({{count($subscribedThemes)}})</span></h2>
                     </div>
                     <div class="add-topic">
                         <input type="text" placeholder="Enter a topic to follow..." id="topicInput">
                         <button class="btn btn-primary" onclick="addTopic()">Add Topic</button>
                     </div>
                     <div id="topicsList">
-                        <div class="topic-item">
-                            <span class="topic-name">Programming</span>
-                            <button class="btn-delete" onclick="deleteTopic(this)">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="topic-item">
-                            <span class="topic-name">Web Development</span>
-                            <button class="btn-delete" onclick="deleteTopic(this)">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="topic-item">
-                            <span class="topic-name">UX Design</span>
-                            <button class="btn-delete" onclick="deleteTopic(this)">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="topic-item">
-                            <span class="topic-name">Artificial Intelligence</span>
-                            <button class="btn-delete" onclick="deleteTopic(this)">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
+                        @foreach ($subscribedThemes as $subscribedTheme)
+                            <div class="topic-item">
+                                <span class="topic-name">{{$subscribedTheme->nom_theme}}</span>
+                                <button class="btn-delete" onclick="deleteTopic(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -88,11 +69,10 @@
             <div class="sidebar">
                 <div class="sidebar-card">
                     <h2>Popular Tags</h2>
-                    <div class="tag">Technology</div>
-                    <div class="tag">Writing</div>
-                    <div class="tag">Programming</div>
-                    <div class="tag">Design</div>
-                    <div class="tag">Productivity</div>
+                    @foreach ($subscribedThemes as $subscribedTheme)
+                        <div class="tag">{{$subscribedTheme->nom_theme}}</div>
+                    @endforeach
+
                 </div>
 
                 <div class="sidebar-card">
