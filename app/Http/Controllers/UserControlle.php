@@ -83,17 +83,21 @@ class UserControlle extends Controller {
         // Fetch the user's subscribed themes using the correct relationship
         $subscribedThemes = $user->subscribedThemes;
 
-
         // Check if the user has subscribed themes
         if ($subscribedThemes->isEmpty()) {
             return view('user.articles', ['articles' => []]);
         }
 
-        // Fetch articles related to the subscribed themes
+        // Fetch articles related to the subscribed themes, excluding the authenticated user's posts
         $articles = Article::whereIn('theme_id', $subscribedThemes->pluck('id'))
+            ->where('user_id', '!=', $user->id) // Exclude the authenticated user's posts
             ->orderBy('created_at', 'desc')
             ->get();
-            return view('user.homePageUser', compact('articles', 'user', 'subscribedThemes'));
+
+        // Shuffle the articles collection
+        $shuffledArticles = $articles->shuffle();
+
+        return view('user.homePageUser', compact('shuffledArticles', 'user', 'subscribedThemes'));
     }
 
     public function showAnalytics(){

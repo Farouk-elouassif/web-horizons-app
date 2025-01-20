@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/homePageUserInvite.css')}}">
-    <title>Tech Horizons</title>
+    <title>Home - Tech Horizons</title>
     <style>
         .hidden {
             display: none;
@@ -74,7 +74,7 @@
 
     <main class="main-content">
         <div class="articles">
-            @foreach ($articles as $article)
+            @foreach ($shuffledArticles as $article)
                 <article class="article" data-topic="{{ optional($article->theme)->nom_theme ?? 'Uncategorized' }}">
                     <div class="article-meta">
                         <a href="#" class="article-author">{{ optional($article->author)->nom ?? 'Unknown Author' }}</a>
