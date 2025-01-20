@@ -88,39 +88,23 @@
                         <span>·</span>
                         <span>{{ $article->read_time ?? '5' }} min read</span>
                     </div>
+                    <!-- Rating Section -->
+                    <div class="rating">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                        <span class="rating-value">(0)</span>
+                    </div>
                 </article>
             @endforeach
         </div>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const topicLinks = document.querySelectorAll('.topic-link');
-            const articles = document.querySelectorAll('.article');
+    
 
-            topicLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
+        <script src="{{asset('js/homePageUser.js')}}"></script>
 
-                    // Remove active class from all links
-                    topicLinks.forEach(link => link.classList.remove('active'));
-                    // Add active class to the clicked link
-                    this.classList.add('active');
-
-                    const selectedTopic = this.getAttribute('data-topic');
-
-                    articles.forEach(article => {
-                        const articleTopic = article.getAttribute('data-topic');
-
-                        if (selectedTopic === 'all' || articleTopic === selectedTopic) {
-                            article.style.display = 'block';
-                        } else {
-                            article.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        });
-    </script>
 </body>
 </html>
