@@ -19,8 +19,10 @@ class ArticleSeeder extends Seeder
                 'contenu' => $faker->paragraphs(3, true),
                 'statut' => $faker->randomElement(['Refusé', 'En cours', 'Retenu', 'Publié']),
                 'date_proposition' => $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'),
-                'theme_id' => $faker->numberBetween(6, 14),
-                'user_id' => $faker->numberBetween(21, 24),
+                'theme_id' => $faker->numberBetween(1, 6),
+                'user_id' => $faker->numberBetween(1, 3),
+                'created_at' => now()
+
             ]);
         }
     }
