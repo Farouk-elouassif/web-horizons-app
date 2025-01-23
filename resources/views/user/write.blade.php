@@ -15,8 +15,8 @@
             <header class="editor-header">
                 <div class="dropdown">
                     <select name="theme" id="theme" class="dropdown-button">
-                        @foreach($themes as $theme)
-                            <option value="{{ $theme->id }}">{{ $theme->nom_theme }}</option>
+                        @foreach($subscribedThemes as $subscribedTheme)
+                            <option value="{{ $subscribedTheme->id }}">{{ $subscribedTheme->nom_theme }}</option>
                         @endforeach
                     </select>
                 </div>

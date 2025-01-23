@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Subscription;
 use App\Models\Theme;
 use App\Models\ArticleNote;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +13,10 @@ class UserControlle extends Controller {
     // Show the form to create a post
     public function showCreatePoste(){
         $user = Auth::user();
-        $themes = Theme::all();
-        return view("user.write", compact('themes', 'user'));
+        $subscribedThemes = $user->subscribedThemes;
+        return view("user.write", compact('subscribedThemes', 'user'));
     }
 
-    // Handle the form submission to create a post
     public function createPoste(Request $request){
         // Validate the request
         $request->validate([
@@ -122,6 +122,9 @@ class UserControlle extends Controller {
         // Fetch the user's subscribed themes
         $subscribedThemes = $user->subscribedThemes;
 
+        // Fetch all themes that the user is NOT subscribed to
+        $unsubscribedThemes = Theme::whereNotIn('id', $subscribedThemes->pluck('id'))->get();
+
         // Fetch all articles written by the user
         $articles = $user->articles()
             ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
@@ -134,8 +137,8 @@ class UserControlle extends Controller {
         $averageRating = ArticleNote::whereIn('article_id', $articleIds)->avg('note');
 
         // Pass the data to the view
-        return view('user.analytics', compact('user', 'articles', 'subscribedThemes', 'averageRating'));
-}
+        return view('user.analytics', compact('user', 'articles', 'subscribedThemes', 'unsubscribedThemes', 'averageRating'));
+    }
 
     public function rateArticle(Request $request){
         $request->validate([
@@ -164,5 +167,24 @@ class UserControlle extends Controller {
         // Redirect back to the same page with a success message
         return redirect()->back();
     }
+
+    public function addThemeToFollowing(Request $request)
+{
+    $request->validate([
+        'theme_id' => 'required|exists:themes,id',
+    ]);
+
+    // Get the authenticated user
+    $user = Auth::user();
+
+    // Add the selected theme to the user's subscriptions
+    Subscription::create([
+        'user_id' => $user->id,
+        'theme_id' => $request->theme_id,
+        'date_abonnement' => now(),
+    ]);
+
+    return redirect()->back();
+}
 
 }

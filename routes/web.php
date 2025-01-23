@@ -69,3 +69,5 @@ Route::get('/user/articles', [UserControlle::class, 'showUserHomePage'])->name('
 Route::get('user/analytics', [UserControlle::class, 'showAnalytics'])->name('user.analytics');
 Route::post('/rate-article', [UserControlle::class, 'rateArticle'])->name('rate.article');
 
+Route::post('/user/add-theme', [UserControlle::class, 'addThemeToFollowing'])->name('user.addTheme');
+

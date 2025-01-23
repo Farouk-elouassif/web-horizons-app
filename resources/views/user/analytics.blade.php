@@ -49,10 +49,6 @@
                     <div class="topics-header">
                         <h2>Topics You Follow <span class="topic-count">({{count($subscribedThemes)}})</span></h2>
                     </div>
-                    <div class="add-topic">
-                        <input type="text" placeholder="Enter a topic to follow..." id="topicInput">
-                        <button class="btn btn-primary" onclick="addTopic()">Add Topic</button>
-                    </div>
                     <div id="topicsList">
                         @foreach ($subscribedThemes as $subscribedTheme)
                             <div class="topic-item">
@@ -63,6 +59,18 @@
                             </div>
                         @endforeach
 
+                    </div>
+                    <div class="add-topic" style="margin-top: 15px;">
+                        <p style="font-weight: bold;">Add Topic to your Topics:</p>
+                        <form action="{{ route('user.addTheme') }}" method="POST">
+                            @csrf
+                            <select name="theme_id" id="unsubscribedThemes" class="dropdown-button">
+                                @foreach ($unsubscribedThemes as $unsubscribedTheme)
+                                    <option value="{{ $unsubscribedTheme->id }}">{{ $unsubscribedTheme->nom_theme }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn">Add Topic</button>
+                        </form>
                     </div>
                 </div>
             </div>
