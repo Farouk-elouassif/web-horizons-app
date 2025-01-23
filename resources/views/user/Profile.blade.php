@@ -55,6 +55,8 @@
                                         @endif
                                     </span>
                                     <span>·</span>
+                                    <span class="rating-value">Average Rating: {{ (int)$article->averageRating ?? 0 }}</span>
+                                    <span>·</span>
                                     <span>
                                         <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
                                             @csrf

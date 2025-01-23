@@ -26,8 +26,8 @@
                 <div class="number">{{count($articles)}}</div>
             </div>
             <div class="stat-card">
-                <h3>Average Notes</h3>
-                <div class="number">5.7</div>
+                <h3>Average Ratings</h3>
+                <div class="number">{{(int) $averageRating}}</div>
             </div>
         </div>
 
