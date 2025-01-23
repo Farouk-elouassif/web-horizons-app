@@ -4,60 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/homePageUserInvite.css')}}">
+    <link rel="stylesheet" href="{{asset('css/post.css')}}">
     <title>Home - Tech Horizons</title>
     <style>
-        .hidden {
-            display: none;
-        }
 
-        .nav-topics {
-            width: 100%;
-            overflow-x: auto; /* Enable horizontal scrolling */
-            white-space: nowrap; /* Prevent wrapping of items */
-            scrollbar-width: thin; /* For Firefox */
-            scrollbar-color: #888 #f1f1f1; /* For Firefox */
-        }
-
-        /* WebKit-based browsers (Chrome, Safari) */
-        .nav-topics::-webkit-scrollbar {
-            height: px; /* Height of the horizontal scrollbar */
-        }
-
-        .nav-topics::-webkit-scrollbar-track {
-            background: #f1f1f1; /* Color of the track */
-            border-radius: 4px;
-        }
-
-        .nav-topics::-webkit-scrollbar-thumb {
-            background: #888; /* Color of the scroll thumb */
-            border-radius: 4px;
-        }
-
-        .nav-topics::-webkit-scrollbar-thumb:hover {
-            background: #555; /* Color of the scroll thumb on hover */
-        }
-
-        /* Topics list styling */
-        .topics-list {
-            display: inline-block; /* Ensure items stay in a single line */
-            padding: 5px 0;
-        }
-
-        .topic-link {
-            display: inline-block;
-            padding: 5px 12px;
-            margin-right: 10px;
-            background-color: #f1f1f1;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .topic-link.active {
-            background-color: black;
-            color: #fff;
-        }
     </style>
 </head>
 <body>
@@ -87,22 +37,19 @@
                         <span>{{$article->created_at->format('M d, Y')}}</span>
                         <span>·</span>
                         <span>{{ $article->read_time ?? '5' }} min read</span>
+                        <span>·</span>
+                        <span class="rating-value">Average Rating: {{ (int)$article->averageRating ?? 0 }}</span>
                     </div>
                     <!-- Rating Section -->
-                    <div class="rating">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
-                        <span class="rating-value">(0)</span>
+                    <div class="rating" data-article-id="{{ $article->id }}">
+
                     </div>
                 </article>
             @endforeach
         </div>
     </main>
 
-    
+
 
         <script src="{{asset('js/homePageUser.js')}}"></script>
 

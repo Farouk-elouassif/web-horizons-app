@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Theme;
+use App\Models\ArticleNote;
 use Illuminate\Support\Facades\Auth;
 
 class UserControlle extends Controller {
@@ -76,29 +77,35 @@ class UserControlle extends Controller {
         return view('user.article', compact('article', 'user'));
     }
 
-    public function showUserHomePage(){
-        // Get the authenticated user
-        $user = Auth::user();
+    public function showUserHomePage()
+{
+    // Get the authenticated user
+    $user = Auth::user();
 
-        // Fetch the user's subscribed themes using the correct relationship
-        $subscribedThemes = $user->subscribedThemes;
+    // Fetch the user's subscribed themes using the correct relationship
+    $subscribedThemes = $user->subscribedThemes;
 
-        // Check if the user has subscribed themes
-        if ($subscribedThemes->isEmpty()) {
-            return view('user.articles', ['articles' => []]);
-        }
-
-        // Fetch articles related to the subscribed themes, excluding the authenticated user's posts
-        $articles = Article::whereIn('theme_id', $subscribedThemes->pluck('id'))
-            ->where('user_id', '!=', $user->id) // Exclude the authenticated user's posts
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        // Shuffle the articles collection
-        $shuffledArticles = $articles->shuffle();
-
-        return view('user.homePageUser', compact('shuffledArticles', 'user', 'subscribedThemes'));
+    // Check if the user has subscribed themes
+    if ($subscribedThemes->isEmpty()) {
+        return view('user.articles', ['articles' => []]);
     }
+
+    // Fetch articles related to the subscribed themes, excluding the authenticated user's posts
+    $articles = Article::whereIn('theme_id', $subscribedThemes->pluck('id'))
+        ->where('user_id', '!=', $user->id) // Exclude the authenticated user's posts
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    // Calculate the average rating for each article
+    $articles->each(function ($article) {
+        $article->averageRating = ArticleNote::where('article_id', $article->id)->avg('note');
+    });
+
+    // Shuffle the articles collection
+    $shuffledArticles = $articles->shuffle();
+
+    return view('user.homePageUser', compact('shuffledArticles', 'user', 'subscribedThemes'));
+}
 
     public function showAnalytics(){
         $user = Auth::user();
@@ -108,4 +115,34 @@ class UserControlle extends Controller {
             ->get();
         return view('user.analytics', compact('user', 'articles', 'subscribedThemes'));
     }
+
+    public function rateArticle(Request $request)
+{
+    $request->validate([
+        'article_id' => 'required|exists:articles,id',
+        'rating' => 'required|integer|between:1,5'
+    ]);
+
+    $userId = auth()->id();
+
+    // Check if the user has already rated the article
+    $existingRating = ArticleNote::where('user_id', $userId)
+        ->where('article_id', $request->article_id)
+        ->first();
+
+    if ($existingRating) {
+        $existingRating->update(['note' => $request->rating]);
+    } else {
+        ArticleNote::create([
+            'user_id' => $userId,
+            'article_id' => $request->article_id,
+            'note' => $request->rating,
+            'date_note' => now()
+        ]);
+    }
+
+    // Redirect back to the same page with a success message
+    return redirect()->back()->with('success', 'Rating submitted successfully!');
+}
+
 }

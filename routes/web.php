@@ -67,4 +67,5 @@ Route::get('/article/{id}', [UserControlle::class, 'showArticlePage'])->name('ar
 Route::get('/user/articles', [UserControlle::class, 'showUserHomePage'])->name('user.articles');
 
 Route::get('user/analytics', [UserControlle::class, 'showAnalytics'])->name('user.analytics');
+Route::post('/rate-article', [UserControlle::class, 'rateArticle'])->name('rate.article');
 

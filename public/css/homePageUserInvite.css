@@ -164,3 +164,58 @@ body {
         font-size: 1rem;
     }
 }
+
+.hidden {
+    display: none;
+}
+
+.nav-topics {
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping of items */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+
+/* WebKit-based browsers (Chrome, Safari) */
+.nav-topics::-webkit-scrollbar {
+    height: px; /* Height of the horizontal scrollbar */
+}
+
+.nav-topics::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+    border-radius: 4px;
+}
+
+.nav-topics::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scroll thumb */
+    border-radius: 4px;
+}
+
+.nav-topics::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scroll thumb on hover */
+}
+
+/* Topics list styling */
+.topics-list {
+    display: inline-block; /* Ensure items stay in a single line */
+    padding: 5px 0;
+}
+
+.topic-link {
+    display: inline-block;
+    padding: 5px 12px;
+    margin-right: 10px;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.topic-link.active {
+    background-color: black;
+    color: #fff;
+}
+
+

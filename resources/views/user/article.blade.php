@@ -45,19 +45,35 @@
                 </div>
             </header>
 
+
             <div class="article-content">
                 <article>
                     {{$article->contenu}}
                 </article>
             </div>
 
+            <div class="rating" data-article-id="{{ $article->id }}">
+                <form action="{{ route('rate.article') }}" method="POST" class="rating-form">
+                    @csrf
+                    <input type="hidden" name="article_id" value="{{ $article->id }}">
+                    <input type="hidden" name="rating" value="0" class="rating-input">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                    <span class="rating-value">({{ (int)$article->averageRating ?? 0 }})</span>
+                </form>
+            </div>
             <footer class="article-footer">
                 <div class="tags">
                     <a href="#" class="tag">{{$article->theme->nom_theme}}</a>
                 </div>
+
             </footer>
         </article>
     </main>
+    <script src="{{asset('js/article.js')}}"></script>
 </body>
 </html>
 
