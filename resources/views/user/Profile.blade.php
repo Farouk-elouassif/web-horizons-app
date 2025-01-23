@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <title>{{$user->nom}} - Profile</title>
     <link rel="stylesheet" href="{{asset('css/Profile.css')}}">
     <link rel="stylesheet" href="{{asset('css/post.css')}}">
