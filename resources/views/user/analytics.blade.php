@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{asset('css/analytics.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
@@ -39,7 +40,7 @@
                     @foreach ($articles as $article)
                         <div class="post-item">
                             <div class="post-title">{{$article->titre}}</div>
-                            <div class="post-stats">{{$article->statut}} · {{$article->theme->nom_theme}} · 23 comments</div>
+                            <div class="post-stats">{{$article->statut}} · {{$article->theme->nom_theme}}</div>
                         </div>
                     @endforeach
 
@@ -52,13 +53,16 @@
                     <div id="topicsList">
                         @foreach ($subscribedThemes as $subscribedTheme)
                             <div class="topic-item">
-                                <span class="topic-name">{{$subscribedTheme->nom_theme}}</span>
-                                <button class="btn-delete" onclick="deleteTopic(this)">
-                                    <i class="fas fa-times"></i>
-                                </button>
+                                <span class="topic-name">{{ $subscribedTheme->nom_theme }}</span>
+                                <form action="{{ route('user.deleteSub', $subscribedTheme->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-delete">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
                             </div>
                         @endforeach
-
                     </div>
                     <div class="add-topic" style="margin-top: 15px;">
                         <p style="font-weight: bold;">Add Topic to your Topics:</p>
@@ -69,7 +73,7 @@
                                     <option value="{{ $unsubscribedTheme->id }}">{{ $unsubscribedTheme->nom_theme }}</option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="btn">Add Topic</button>
+                            <button type="submit" class="btn1">Add Topic</button>
                         </form>
                     </div>
                 </div>
@@ -93,6 +97,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="{{asset('js/analytics.js')}}"></script>
 </body>

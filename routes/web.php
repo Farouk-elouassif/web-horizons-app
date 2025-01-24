@@ -70,4 +70,6 @@ Route::get('user/analytics', [UserControlle::class, 'showAnalytics'])->name('use
 Route::post('/rate-article', [UserControlle::class, 'rateArticle'])->name('rate.article');
 
 Route::post('/user/add-theme', [UserControlle::class, 'addThemeToFollowing'])->name('user.addTheme');
+Route::delete('/topics/{id}', [UserControlle::class, 'deleteTopic'])->name('user.deleteSub');
+
 

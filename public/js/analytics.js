@@ -18,12 +18,5 @@ function addTopic() {
     }
 }
 
-function deleteTopic(button) {
-    button.closest('.topic-item').remove();
-    updateTopicCount();
-}
 
-function updateTopicCount() {
-    const count = document.querySelectorAll('.topic-item').length;
-    document.querySelector('.topic-count').textContent = `(${count})`;
-}
+

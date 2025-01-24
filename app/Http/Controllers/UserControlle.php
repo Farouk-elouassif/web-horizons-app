@@ -122,6 +122,8 @@ class UserControlle extends Controller {
         // Fetch the user's subscribed themes
         $subscribedThemes = $user->subscribedThemes;
 
+
+
         // Fetch all themes that the user is NOT subscribed to
         $unsubscribedThemes = Theme::whereNotIn('id', $subscribedThemes->pluck('id'))->get();
 
@@ -168,23 +170,32 @@ class UserControlle extends Controller {
         return redirect()->back();
     }
 
-    public function addThemeToFollowing(Request $request)
-{
-    $request->validate([
-        'theme_id' => 'required|exists:themes,id',
-    ]);
+    public function addThemeToFollowing(Request $request){
+        $request->validate([
+            'theme_id' => 'required|exists:themes,id',
+        ]);
 
-    // Get the authenticated user
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Add the selected theme to the user's subscriptions
+        Subscription::create([
+            'user_id' => $user->id,
+            'theme_id' => $request->theme_id,
+            'date_abonnement' => now(),
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function deleteTopic($themeId){
+        
     $user = Auth::user();
 
-    // Add the selected theme to the user's subscriptions
-    Subscription::create([
-        'user_id' => $user->id,
-        'theme_id' => $request->theme_id,
-        'date_abonnement' => now(),
-    ]);
+    Subscription::where('user_id', $user->id)
+                ->where('theme_id', $themeId)
+                ->delete();
 
     return redirect()->back();
 }
-
 }

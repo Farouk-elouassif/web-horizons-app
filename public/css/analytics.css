@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -65,11 +64,6 @@ body {
     margin-bottom: 0.5rem;
 }
 
-.stat-card .trend {
-    color: #03A678;
-    font-size: 0.9rem;
-}
-
 .content-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -132,11 +126,6 @@ body {
     color: #757575;
 }
 
-.trend.negative {
-    color: #DC2626;
-}
-
-/* New styles for topic management */
 .topics-section {
     background: white;
     padding: 1.5rem;
@@ -166,22 +155,19 @@ body {
     font-size: 0.9rem;
 }
 
-.btn {
+.btn1 {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 2px;
     cursor: pointer;
     font-size: 0.9rem;
+    background-color: #000000;
     transition: background-color 0.2s;
+    color: #f9f9f9;
 }
 
-.btn-primary {
-    background-color: #03A678;
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #028c65;
+.btn1:hover {
+    background-color: #000000ac;
 }
 
 .topic-item {
@@ -235,7 +221,6 @@ body {
     border-radius: 4px;
     width: 300px;
     text-align: center;
-
 }
 
 .dropdown-button:hover {
@@ -255,7 +240,7 @@ body {
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
-    font-family: Palatino , URW Palladio L , serif;
+    font-family: Palatino, URW Palladio L, serif;
     font-size: small;
     text-decoration: none;
     display: block;
@@ -268,4 +253,3 @@ body {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
