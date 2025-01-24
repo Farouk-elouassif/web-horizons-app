@@ -19,7 +19,7 @@
                     <li><a href="{{route('user.articles')}}">Home</a></li>
                     <li><a href="{{route('write.form')}}" target="_blank">Write</a></li>
                     <li><a href="{{route('user.analytics')}}">Dashboard</a></li>
-                    <li><a href="#">Conversations</a></li>
+                    <li><a href="{{route('user.history')}}">Historiques</a></li>
                 </ul>
             </nav>
             <div class="search-login">

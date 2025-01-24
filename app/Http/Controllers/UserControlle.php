@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Subscription;
 use App\Models\Theme;
 use App\Models\ArticleNote;
+use App\Models\NavigationHistory;
 use Illuminate\Support\Facades\Auth;
 
 class UserControlle extends Controller {
@@ -78,9 +79,11 @@ class UserControlle extends Controller {
         $article = Article::findOrFail($id);
         $user = Auth::user();
 
-
-
-
+        $NavigationHistory = NavigationHistory::create([
+            'date_consultation' => now(),
+            'user_id' => $user->id,
+            'article_id' => $id
+        ]);
 
         // Pass the article to the view
         return view('user.article', compact('article', 'user'));
@@ -189,13 +192,21 @@ class UserControlle extends Controller {
     }
 
     public function deleteTopic($themeId){
-        
-    $user = Auth::user();
 
-    Subscription::where('user_id', $user->id)
-                ->where('theme_id', $themeId)
-                ->delete();
+        $user = Auth::user();
 
-    return redirect()->back();
-}
+        Subscription::where('user_id', $user->id)
+                    ->where('theme_id', $themeId)
+                    ->delete();
+
+        return redirect()->back();
+    }
+
+    public function showHistory(){
+        $user = Auth::user();
+        $articlesHistory = NavigationHistory::where('user_id', $user->id)
+                                            ->with('article') // Eager-load the article relationship
+                                            ->get();
+        return view('user.history', compact('user', 'articlesHistory'));
+    }
 }

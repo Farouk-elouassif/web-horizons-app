@@ -72,4 +72,7 @@ Route::post('/rate-article', [UserControlle::class, 'rateArticle'])->name('rate.
 Route::post('/user/add-theme', [UserControlle::class, 'addThemeToFollowing'])->name('user.addTheme');
 Route::delete('/topics/{id}', [UserControlle::class, 'deleteTopic'])->name('user.deleteSub');
 
+Route::get('user/history', [UserControlle::class, 'showHistory'])->name('user.history');
+
+
 

@@ -22,6 +22,6 @@ class NavigationHistory extends Model
     // Navigation history belongs to an article
     public function article(): BelongsTo
     {
-        return $this->belongsTo(Article::class);
+        return $this->belongsTo(Article::class, 'article_id');
     }
 }
