@@ -16,8 +16,8 @@
     <div class="container">
         <div class="stats-grid">
             <div class="stat-card">
-                <h3>Total Views</h3>
-                <div class="number">23,578</div>
+                <h3>Articles read</h3>
+                <div class="number">{{$articlesHistory}}</div>
             </div>
             <div class="stat-card">
                 <h3>Topics Followed</h3>
@@ -35,17 +35,6 @@
 
         <div class="content-grid">
             <div>
-                <div class="recent-posts">
-                    <h2>Articles</h2>
-                    @foreach ($articles as $article)
-                        <div class="post-item">
-                            <div class="post-title">{{$article->titre}}</div>
-                            <div class="post-stats">{{$article->statut}} · {{$article->theme->nom_theme}}</div>
-                        </div>
-                    @endforeach
-
-                </div>
-
                 <div class="topics-section">
                     <div class="topics-header">
                         <h2>Topics You Follow <span class="topic-count">({{count($subscribedThemes)}})</span></h2>
@@ -77,6 +66,16 @@
                         </form>
                     </div>
                 </div>
+                {{-- <div class="recent-posts">
+                    <h2>Articles</h2>
+                    @foreach ($articles as $article)
+                        <div class="post-item">
+                            <div class="post-title">{{$article->titre}}</div>
+                            <div class="post-stats">{{$article->statut}} · {{$article->theme->nom_theme}}</div>
+                        </div>
+                    @endforeach
+
+                </div> --}}
             </div>
 
             <div class="sidebar">

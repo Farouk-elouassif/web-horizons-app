@@ -125,8 +125,6 @@ class UserControlle extends Controller {
         // Fetch the user's subscribed themes
         $subscribedThemes = $user->subscribedThemes;
 
-
-
         // Fetch all themes that the user is NOT subscribed to
         $unsubscribedThemes = Theme::whereNotIn('id', $subscribedThemes->pluck('id'))->get();
 
@@ -141,8 +139,12 @@ class UserControlle extends Controller {
         // Calculate the average rating for the user's articles
         $averageRating = ArticleNote::whereIn('article_id', $articleIds)->avg('note');
 
+        $articlesHistory = NavigationHistory::where('user_id', $user->id)
+                                            ->with('article')
+                                            ->count();
+
         // Pass the data to the view
-        return view('user.analytics', compact('user', 'articles', 'subscribedThemes', 'unsubscribedThemes', 'averageRating'));
+        return view('user.analytics', compact('user', 'articles', 'subscribedThemes', 'unsubscribedThemes', 'averageRating', 'articlesHistory'));
     }
 
     public function rateArticle(Request $request){
@@ -205,7 +207,7 @@ class UserControlle extends Controller {
     public function showHistory(){
         $user = Auth::user();
         $articlesHistory = NavigationHistory::where('user_id', $user->id)
-                                            ->with('article') // Eager-load the article relationship
+                                            ->with('article')
                                             ->get();
         return view('user.history', compact('user', 'articlesHistory'));
     }

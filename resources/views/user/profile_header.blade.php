@@ -11,7 +11,6 @@
     <header class="header">
         <div class="logo">
             <a href="">Tech Horizons</a>
-            <input type="search" name="" id="input_search" placeholder="Search">
         </div>
         <div class="rightside">
             <nav class="nav-links">
