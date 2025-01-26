@@ -65,7 +65,7 @@ class AuthController extends Controller
             'nom' => $nom, // Use the combined name
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'Responsable de thème', // Default role
+            'role' => 'Abonné', // Default role
             'date_inscription' => now(), // Current timestamp
         ]);
 

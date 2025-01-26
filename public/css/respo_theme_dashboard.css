@@ -181,8 +181,7 @@ body {
 }
 
 .article-header {
-    display: flex;
-    justify-content: space-between;
+
     margin-bottom: 0.5rem;
 }
 
@@ -190,17 +189,15 @@ body {
     font-weight: 500;
 }
 
-.article-status {
-    font-size: 0.85rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    background: #e8f5e9;
-    color: #2e7d32;
-}
+
 
 .article-meta {
     font-size: 0.9rem;
     color: #666;
+}
+
+.btns{
+    margin-top: 10px;
 }
 
 .action-button {
@@ -326,4 +323,33 @@ body {
     .toggle-sidebar {
         display: none;
     }
+}
+
+.sign-out-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 16px;
+    font-size: 0.875rem;
+}
+
+.sign-out-btn:hover {
+    background: #dc2626;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.secondary-icon {
+    width: 16px;
+    height: 16px;
 }

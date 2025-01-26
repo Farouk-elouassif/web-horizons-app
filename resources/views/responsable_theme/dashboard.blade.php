@@ -38,18 +38,31 @@
             <div class="section-card">
                 <div class="section-header">
                     <h2 class="section-title">Articles en Attente de Modération ({{$articleEnCourCount}})</h2>
-                    <button class="action-button">Voir Tout</button>
                 </div>
                 <div class="article-list">
                     @foreach ($inProgressArticles as $article)
                         <div class="article-item">
                             <div class="article-header">
                                 <div class="article-title">{{$article->titre}}</div>
-                                <span class="article-status">En Attente</span>
-                                <button class="action-button">Accept</button>
+
                             </div>
                             <div class="article-meta">
                                 Par {{($article->author)->nom}} • Soumis {{$article->created_at->format('M d, Y')}}
+                            </div>
+                            <div class="btns">
+                                <form action="{{ route('article.publish', $article->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <button type="submit"  class="action-button" style="background-color: rgb(8, 117, 8)">Accept</button>
+                                </form>
+                                <form action="{{ route('article.deny', $article->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <button type="submit"  class="action-button">Deny</button>
+                                </form>
+                                <form action="{{ route('article.destroy', $article->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="action-button" style="background-color: rgb(203, 11, 11)" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                </form>
                             </div>
                         </div>
                     @endforeach

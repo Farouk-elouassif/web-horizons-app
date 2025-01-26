@@ -103,7 +103,8 @@ class UserControlle extends Controller {
 
         // Fetch articles related to the subscribed themes, excluding the authenticated user's posts
         $articles = Article::whereIn('theme_id', $subscribedThemes->pluck('id'))
-            ->where('user_id', '!=', $user->id) // Exclude the authenticated user's posts
+            ->where('user_id', '!=', $user->id)// Exclude the authenticated user's posts
+            ->where('statut', 'Publié')
             ->orderBy('created_at', 'desc')
             ->get();
 

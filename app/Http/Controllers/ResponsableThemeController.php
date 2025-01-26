@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Article;
 class ResponsableThemeController extends Controller
 {
     public function showDashboard(){
@@ -45,5 +46,37 @@ class ResponsableThemeController extends Controller
         ));
     }
 
+    // Method to delete an article
+    public function destroy(Article $article)
+    {
+        // Delete the article
+        $article->delete();
+
+        // Return a success response
+        return redirect()->back();
+    }
+
+
+    // Method to publish an article
+    public function publish(Article $article)
+    {
+        // Check if the article is in "En cours" status
+        if ($article->status != 'Publié') {
+            // Update the status to "Publié"
+            $article->update(['statut' => 'Publié']);
+
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'Article published successfully!');
+        }
+
+        // If the article is not in "En cours" status, return an error
+        return redirect()->back()->with('error', 'Article cannot be published.');
+    }
+
+    // Method to DENY an article
+    public function deny(Article $article){
+            $article->update(['statut' => 'Refusé']);
+            return redirect()->back()->with('success', 'Article published successfully!');
+    }
 
 }

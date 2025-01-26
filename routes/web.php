@@ -76,5 +76,10 @@ Route::delete('/topics/{id}', [UserControlle::class, 'deleteTopic'])->name('user
 Route::get('user/history', [UserControlle::class, 'showHistory'])->name('user.history');
 
 Route::get('responsable/dashboard', [ResponsableThemeController::class, 'showDashboard'])->name('respo.dashboard');
-
+Route::delete('/articles/{article}', [ResponsableThemeController::class, 'destroy'])->name('article.destroy');
+Route::post('/articles/{article}/publish', [ResponsableThemeController::class, 'publish'])->name('article.publish');
+Route::post('/articles/{article}/deny', [ResponsableThemeController::class, 'deny'])->name('article.deny');
+Route::get('responable/articles', function(){
+    return view('responsable_theme.articles_section')
+})
 
