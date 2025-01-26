@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Sign Up</title>
         <link rel="stylesheet" href="{{ asset('css/LoginUp.css') }}">
-        <link rel="icon" type="image/jpeg" href="{{ asset('favicon.jpeg') }}">
+        <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+        <title>Sign Up</title>
     </head>
     <body>
         <div class="container">
@@ -16,6 +16,7 @@
                     @endforeach
                 </div>
             @endif
+            
             <form id="SignUpForm" method="POST" action="{{route("register.submit")}}">
                 @csrf
                 <div class="InputPassGroup">

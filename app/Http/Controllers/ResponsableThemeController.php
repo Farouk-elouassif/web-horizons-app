@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\Subscription;
-class ResponsableThemeController extends Controller
-{
+class ResponsableThemeController extends Controller{
+    
     public function showDashboard(){
 
         // Get the authenticated user
@@ -48,8 +48,7 @@ class ResponsableThemeController extends Controller
     }
 
     // Method to delete an article
-    public function destroy(Article $article)
-    {
+    public function destroy(Article $article){
         // Delete the article
         $article->delete();
 
@@ -57,10 +56,8 @@ class ResponsableThemeController extends Controller
         return redirect()->back();
     }
 
-
     // Method to publish an article
-    public function publish(Article $article)
-    {
+    public function publish(Article $article){
         // Check if the article is in "En cours" status
         if ($article->status != 'Publié') {
             // Update the status to "Publié"

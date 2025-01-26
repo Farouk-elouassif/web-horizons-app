@@ -3,20 +3,21 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sign In</title>
         <link rel="stylesheet" href="{{ asset('css/LoginUp.css') }}">
-        <link rel="icon" type="image/jpeg" href="{{ asset('favicon.jpeg') }}">
+        <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+        <title>Sign In</title>
     </head>
     <body>
         <div class="container">
             <h1>Sign In</h1>
-                @if ($errors->any())
+            @if ($errors->any())
                 <div>
                     @foreach ($errors->all() as $error)
                         <p style="color: red;">{{ $error }}.</p>
                     @endforeach
                 </div>
             @endif
+            
             <form id="SignInForm" method="POST" action="{{route('login.submit')}}">
                 @csrf
                 <div class="InputPassGroup">
