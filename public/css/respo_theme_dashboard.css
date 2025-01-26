@@ -152,6 +152,14 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+.section-card2 {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 300px;
+}
+
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -301,7 +309,7 @@ body {
 .toggle-sidebar {
     position: fixed;
     top: 2.5rem;
-    left: 1rem;
+    left: 0.5rem;
     z-index: 1000;
     background: none;
     border: none;
@@ -353,4 +361,13 @@ body {
 .secondary-icon {
     width: 16px;
     height: 16px;
+}
+
+.article-list .article-item .article-header .article-title a{
+    text-decoration: none;
+    color: black;
+}
+
+.article-list .article-item .article-header .article-title a:hover{
+    text-decoration: underline;
 }

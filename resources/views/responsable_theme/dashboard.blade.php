@@ -43,7 +43,7 @@
                     @foreach ($inProgressArticles as $article)
                         <div class="article-item">
                             <div class="article-header">
-                                <div class="article-title">{{$article->titre}}</div>
+                                <div class="article-title"><a href="{{ route('article.show', $article->id) }}" target="_blank">{{$article->titre}}</a></div>
 
                             </div>
                             <div class="article-meta">
@@ -70,7 +70,7 @@
                 </div>
             </div>
 
-            <div class="section-card">
+            <div class="section-card2">
                 <div class="section-header">
                     <h2 class="section-title">Nouveaux Abonnés</h2>
                 </div>

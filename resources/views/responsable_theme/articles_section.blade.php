@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/respo_theme_dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('css/articles_respo_section.css')}}">
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Gestion des Articles - Tech Horizons</title>
     <style>
