@@ -17,7 +17,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('subscribers.manager')}}" class="nav-link">
                 <i class="fas fa-users"></i>
                 Abonnés
             </a>

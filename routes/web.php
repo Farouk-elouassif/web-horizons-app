@@ -81,4 +81,6 @@ Route::post('/articles/{article}/publish', [ResponsableThemeController::class, '
 Route::post('/articles/{article}/deny', [ResponsableThemeController::class, 'deny'])->name('article.deny');
 
 Route::get('responsable/articles',[ResponsableThemeController::class, 'manageArticles'])->name('article.manager');
+Route::get('responsable/subscribers',[ResponsableThemeController::class, 'managesubscribers'])->name('subscribers.manager');
+Route::delete('/subscription/{id}', [ResponsableThemeController::class, 'deleteSubscription'])->name('subscription.delete');
 

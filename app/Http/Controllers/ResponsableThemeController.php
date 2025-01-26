@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
+use App\Models\Subscription;
 class ResponsableThemeController extends Controller
 {
     public function showDashboard(){
@@ -93,6 +94,26 @@ class ResponsableThemeController extends Controller
             'articles',
             'articlesCount'
         ));
+    }
+
+    public function manageSubscribers(){
+
+        $user = Auth::user();
+        $theme = $user->themes()->first();
+        $subscribers = $theme->subscribers()->get();
+        return view('responsable_theme.subscribers_section', compact('user', 'theme', 'subscribers'));
+    }
+
+    public function deleteSubscription($user_id){
+        $user = Auth::user();
+
+        $theme = $user->themes()->first();
+        Subscription::where('user_id', $user_id)
+                    ->where('theme_id', $theme->id)
+                    ->delete();
+
+        return redirect()->back();
+
     }
 
 }

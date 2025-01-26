@@ -28,15 +28,28 @@ class UserControlle extends Controller {
         // Get the currently authenticated user
         $user = Auth::user();
 
-        // Create the article and associate it with the user
-        $article = Article::create([
-            'titre' => $request->title,
-            'contenu' => $request->article,
-            'statut' => 'En cours', // Default status
-            'theme_id' => $request->theme,  // You can update this to dynamically assign a theme
-            'user_id' => $user->id, // Associate the article with the logged-in user
-            'date_proposition' => now(),
-        ]);
+        if($user->role === 'Abonné'){
+            // Create the article and associate it with the user
+            $article = Article::create([
+                'titre' => $request->title,
+                'contenu' => $request->article,
+                'statut' => 'En cours', // Default status
+                'theme_id' => $request->theme,  // You can update this to dynamically assign a theme
+                'user_id' => $user->id, // Associate the article with the logged-in user
+                'date_proposition' => now(),
+            ]);
+        }else {
+            // Create the article and associate it with the user
+            $article = Article::create([
+                'titre' => $request->title,
+                'contenu' => $request->article,
+                'statut' => 'Publié', // Default status
+                'theme_id' => $request->theme,  // You can update this to dynamically assign a theme
+                'user_id' => $user->id, // Associate the article with the logged-in user
+                'date_proposition' => now(),
+            ]);
+        }
+
 
         // Redirect back with a success message
         return redirect()->route('user.dashboard');
