@@ -26,4 +26,9 @@ class Theme extends Model
                     ->withPivot('date_abonnement')
                     ->withTimestamps();
     }
+    
+    public function users()
+{
+    return $this->belongsToMany(User::class, 'theme_user', 'theme_id', 'user_id');
+}
 }

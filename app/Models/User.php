@@ -48,5 +48,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Conversation::class);
     }
+
+    public function themes()
+{
+    return $this->belongsToMany(Theme::class, 'theme_user', 'user_id', 'theme_id');
+}
 }
 

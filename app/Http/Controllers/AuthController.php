@@ -33,7 +33,9 @@ class AuthController extends Controller
             // Redirect based on the user's role
             if ($user->role === 'Éditeur') {
                 return redirect()->route('admin.dashboard');
-            } elseif ($user->role === 'Abonné') {
+            } elseif ($user->role ===  'Responsable de thème') {
+                return redirect()->route('respo.dashboard');
+            } elseif ($user->role === 'Abonné' ) {
                 return redirect()->route('user.articles');
             }
 
@@ -63,7 +65,7 @@ class AuthController extends Controller
             'nom' => $nom, // Use the combined name
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'Abonné', // Default role
+            'role' => 'Responsable de thème', // Default role
             'date_inscription' => now(), // Current timestamp
         ]);
 

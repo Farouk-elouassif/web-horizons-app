@@ -97,9 +97,9 @@ class UserControlle extends Controller {
         $subscribedThemes = $user->subscribedThemes;
 
         // Check if the user has subscribed themes
-        if ($subscribedThemes->isEmpty()) {
-            return view('user.articles', ['articles' => []]);
-        }
+        // if ($subscribedThemes->isEmpty()) {
+        //     return view('user.articles', ['articles' => []]);
+        // }
 
         // Fetch articles related to the subscribed themes, excluding the authenticated user's posts
         $articles = Article::whereIn('theme_id', $subscribedThemes->pluck('id'))

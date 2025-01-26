@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserControlle;
 use App\Http\Controllers\invitedController;
+use App\Http\Controllers\ResponsableThemeController;
 use App\Models\Theme;
 
 
@@ -74,5 +75,6 @@ Route::delete('/topics/{id}', [UserControlle::class, 'deleteTopic'])->name('user
 
 Route::get('user/history', [UserControlle::class, 'showHistory'])->name('user.history');
 
+Route::get('responsable/dashboard', [ResponsableThemeController::class, 'showDashboard'])->name('respo.dashboard');
 
 
