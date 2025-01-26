@@ -9,7 +9,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Gestion des Articles - Tech Horizons</title>
     <style>
-        /* Add your custom styles here */
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -39,7 +71,7 @@
             <tbody id="articlesTableBody">
                 @foreach ($articles as $article)
                     <tr>
-                        <td ><a href="{{ route('article.show', $article->id) }}" target="_blank">{{$article->titre}}</a></td>
+                        <td><a href="{{ route('article.show', $article->id) }}" target="_blank">{{$article->titre}}</a></td>
                         <td>{{($article->author)->nom}}</td>
                         <td>
                             @if ($article->statut === 'Publié')
@@ -57,7 +89,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="delete-btn" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this post?')">Delete</button>
                             </form>
-                            <button class="suggest-btn" onclick="openSuggestModal()">Suggérer</button>
+                            <button class="suggest-btn" onclick="openModal({{ $article->id }})">Suggérer</button>
                         </td>
                     </tr>
                 @endforeach
@@ -65,77 +97,45 @@
         </table>
     </div>
 
+    <!-- Modal -->
     <div id="suggestModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeModal()">&times;</span>
             <h2>Suggérer pour un numéro</h2>
-            <form id="suggestForm">
-                <input type="number" id="issueNumber" placeholder="Numéro du magazine" required>
+            <form id="suggestForm" action="{{ route('suggest.numero', ['article' => $article->id]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="article_id" id="articleId">
+                <label for="numero_id">Sélectionner un numéro:</label>
+                <select name="numero_id" id="numero_id">
+                    @foreach ($numeros as $numero)
+                        <option value="{{ $numero->id }}">{{ $numero->titre_numero }}</option>
+                    @endforeach
+                </select>
                 <button type="submit">Suggérer</button>
             </form>
         </div>
     </div>
 
     <script>
-        function filterArticles() {
-            const statusFilter = document.getElementById('statusFilter').value.toLowerCase();
-            const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const rows = document.querySelectorAll('#articlesTableBody tr');
+        // Function to open the modal
+        function openModal(articleId) {
+    console.log("Article ID:", articleId); // Debugging line
+    document.getElementById('articleId').value = articleId;
+    document.getElementById('suggestModal').style.display = 'block';
+}
 
-            rows.forEach(row => {
-                const statusCell = row.querySelector('td:nth-child(3) .status').textContent.toLowerCase();
-                const titleCell = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
-                const authorCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-
-                const matchesStatus = statusFilter === 'all' || statusCell.includes(statusFilter);
-                const matchesSearch = titleCell.includes(searchInput) || authorCell.includes(searchInput);
-
-                if (matchesStatus && matchesSearch) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('suggestModal').style.display = 'none';
         }
 
-        // Modal functionality
-        const modal = document.getElementById('suggestModal');
-        const closeBtn = document.getElementsByClassName('close')[0];
-        const suggestForm = document.getElementById('suggestForm');
-
-        function openSuggestModal() {
-            modal.style.display = 'block';
-        }
-
-        closeBtn.onclick = function() {
-            modal.style.display = 'none';
-        }
-
+        // Close the modal when clicking outside the modal
         window.onclick = function(event) {
+            const modal = document.getElementById('suggestModal');
             if (event.target == modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
-        }
-
-        suggestForm.onsubmit = function(e) {
-            e.preventDefault();
-            const issueNumber = document.getElementById('issueNumber').value;
-            alert(`Article suggéré pour le numéro ${issueNumber}`);
-            modal.style.display = 'none';
-            suggestForm.reset();
-        }
-
-        // Sidebar toggle functionality (if needed)
-        const toggleSidebarBtn = document.getElementById('toggleSidebar');
-        const sidebar = document.querySelector('.sidebar');
-        const mainContent = document.querySelector('.main-content');
-
-        if (toggleSidebarBtn) {
-            toggleSidebarBtn.onclick = function() {
-                sidebar.classList.toggle('collapsed');
-                mainContent.classList.toggle('expanded');
-            }
-        }
+        };
     </script>
 </body>
 </html>

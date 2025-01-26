@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Numero extends Model
 {
-    // Define the relationship with the Article model
     public function articles(): BelongsToMany
-    {
-        return $this->belongsToMany(Article::class, 'article_numero');
-    }
+{
+    return $this->belongsToMany(Article::class, 'article_numero', 'numero_id', 'article_id');
+}
 }
