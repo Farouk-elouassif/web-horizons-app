@@ -47,4 +47,10 @@ class Article extends Model
     {
         return $this->hasMany(NavigationHistory::class);
     }
+
+    // Define the relationship with the Numero model
+    public function numeros(): BelongsToMany
+    {
+        return $this->belongsToMany(Numero::class, 'article_numero');
+    }
 }

@@ -27,7 +27,7 @@
                 <h4 class="your-articles">Your Articles</h4>
                 <div id="posts" style="width: 700px; padding:10px">
                     @if($articles->isEmpty())
-                        <p class="msg">You dont have any Artics yet</p>
+                        <p class="msg">You dont have any Articles yet</p>
                     @else
                     <div class="articles">
                         @foreach ($articles as $article)
