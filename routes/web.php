@@ -79,7 +79,6 @@ Route::get('responsable/dashboard', [ResponsableThemeController::class, 'showDas
 Route::delete('/articles/{article}', [ResponsableThemeController::class, 'destroy'])->name('article.destroy');
 Route::post('/articles/{article}/publish', [ResponsableThemeController::class, 'publish'])->name('article.publish');
 Route::post('/articles/{article}/deny', [ResponsableThemeController::class, 'deny'])->name('article.deny');
-Route::get('responable/articles', function(){
-    return view('responsable_theme.articles_section')
-})
+
+Route::get('responsable/articles',[ResponsableThemeController::class, 'manageArticles'])->name('article.manager');
 

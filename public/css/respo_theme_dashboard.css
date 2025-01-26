@@ -31,6 +31,7 @@ body {
     display: block;
     margin-bottom: 2rem;
     margin-top: 7px;
+    margin-left: 25px;
 }
 
 .nav-list {
@@ -299,7 +300,7 @@ body {
 
 .toggle-sidebar {
     position: fixed;
-    top: 0.3rem;
+    top: 2.5rem;
     left: 1rem;
     z-index: 1000;
     background: none;

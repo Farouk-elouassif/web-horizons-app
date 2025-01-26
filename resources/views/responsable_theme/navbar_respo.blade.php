@@ -5,13 +5,13 @@
     <a href="/" class="logo" >Tech Horizons</a>
     <ul class="nav-list">
         <li class="nav-item active" >
-            <a href="#" class="nav-link">
+            <a href="{{route('respo.dashboard')}}" class="nav-link">
                 <i class="fas fa-home"></i>
                 Tableau de bord
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('article.manager')}}" class="nav-link">
                 <i class="fas fa-newspaper"></i>
                 Articles
             </a>

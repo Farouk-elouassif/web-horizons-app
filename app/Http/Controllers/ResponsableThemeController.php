@@ -79,4 +79,20 @@ class ResponsableThemeController extends Controller
             return redirect()->back()->with('success', 'Article published successfully!');
     }
 
+    public function manageArticles(){
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Fetch the single theme the user is responsible for
+        $theme = $user->themes()->first();
+        $articles = $theme->articles()->get();
+        $articlesCount = $theme->articles()->count();
+
+        return view('responsable_theme.articles_section', compact(
+            'theme',
+            'articles',
+            'articlesCount'
+        ));
+    }
+
 }

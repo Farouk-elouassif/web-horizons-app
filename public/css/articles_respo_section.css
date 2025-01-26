@@ -1,0 +1,180 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    background-color: rgb(236, 230, 224);
+    display: flex;
+}
+
+.main-content {
+    margin-left: 280px;
+    padding: 2rem;
+    width: calc(100% - 280px);
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main-content.expanded {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* Rest of your existing styles */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+select, input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+}
+
+.status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-published {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-draft {
+    background-color: #fff3e0;
+    color: #f80808;
+}
+
+.status-review {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1.5rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.2s;
+}
+
+.delete-btn {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.delete-btn:hover {
+    background-color: #ffcdd2;
+}
+
+.suggest-btn {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.suggest-btn:hover {
+    background-color: #c8e6c9;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 4px;
+}
+
+.toggle-sidebar {
+    position: fixed;
+    top: 2rem;
+    left: 0rem;
+    z-index: 1000;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    padding-bottom: 100px
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#suggestForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#suggestForm input {
+    width: 100%;
+}
+
+#suggestForm button {
+    align-self: flex-end;
+}
+
+tr td a{
+    text-decoration: none;
+    color: black;
+}
+
+tr td a:hover{
+    text-decoration: underline;
+}
