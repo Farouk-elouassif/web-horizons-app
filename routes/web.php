@@ -84,3 +84,7 @@ Route::get('responsable/articles',[ResponsableThemeController::class, 'manageArt
 Route::get('responsable/subscribers',[ResponsableThemeController::class, 'managesubscribers'])->name('subscribers.manager');
 Route::delete('/subscription/{id}', [ResponsableThemeController::class, 'deleteSubscription'])->name('subscription.delete');
 Route::post('/articles/suggest/{article}', [ResponsableThemeController::class, 'suggestArticleForNumero'])->name('suggest.numero');
+Route::post('article/conversation/', [UserControlle::class, 'conversation'])->name('user.conversation');
+Route::get('responsable/conversations', [ResponsableThemeController::class, 'manageConversations'])->name('conversations.manager');
+Route::delete('/comment/{comment}', [ResponsableThemeController::class, 'deleteComment'])->name('comment.destroy');
+
