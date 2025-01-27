@@ -32,7 +32,7 @@ class AuthController extends Controller{
 
             // Redirect based on the user's role
             if ($user->role === 'Éditeur') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('editor.dashboard');
             } elseif ($user->role ===  'Responsable de thème') {
                 return redirect()->route('respo.dashboard');
             } elseif ($user->role === 'Abonné' ) {
