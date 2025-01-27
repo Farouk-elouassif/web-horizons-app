@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\Subscription;
 use App\Models\Numero;
+use App\Models\Conversation;
 class ResponsableThemeController extends Controller{
 
     public function showDashboard(){
@@ -127,6 +128,20 @@ class ResponsableThemeController extends Controller{
 
         $article->numeros()->attach($numero->id_numero);
 
+        return redirect()->back();
+    }
+
+    public function manageConversations(){
+        $user = Auth::user();
+
+        $theme = $user->themes()->first();
+
+        $themeArticles = $theme->articles()->get();
+        return view('responsable_theme.conversations_section', compact('theme', 'themeArticles'));
+    }
+
+    public function deleteComment(Conversation $comment) {
+        $comment->delete();
         return redirect()->back();
     }
 

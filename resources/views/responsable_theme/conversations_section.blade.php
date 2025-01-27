@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/respo_theme_dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('css/conversations.css')}}">
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Gestion des Conversations - Tech Horizons</title>
 </head>
@@ -12,7 +14,7 @@
     @include('responsable_theme.navbar_respo') <!-- Include the navbar here -->
 
     <div class="main-content">
-        <h1>Gestion des Conversations</h1>
+        <h1>{{$theme->nom_theme}} Conversations Manager</h1>
         <div class="filters">
             <select id="statusFilter">
                 <option value="all">Tous les statuts</option>
@@ -33,24 +35,21 @@
             </thead>
             <tbody id="conversationsTableBody">
                 <!-- Hardcoded example row -->
-                <tr>
-                    <td>L'Impact de l'IA sur l'Industrie Automobile</td>
-                    <td>Jean Dupont</td>
-                    <td>Merci pour votre article !</td>
-                    <td>15/05/2023</td>
-                    <td class="actions">
-                        <button class="delete-btn" onclick="deleteConversation()">Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Les Avancées de la Biotechnologie</td>
-                    <td>Marie Curie</td>
-                    <td>Très instructif !</td>
-                    <td>10/04/2023</td>
-                    <td class="actions">
-                        <button class="delete-btn" onclick="deleteConversation()">Supprimer</button>
-                    </td>
-                </tr>
+                @foreach ($themeArticles as $article)
+                    <tr>
+                        <td><a href="{{ route('article.show', $article->id) }}" target="_blank">{{ $article->titre }}</a></td>
+                        <td>{{ $article->author->nom }}</td>
+                        <td>
+                            {{-- Get the latest conversation --}}
+                            {{ $article->conversations->last()->message ?? 'No conversations' }}
+                        </td>
+                        <td>{{$article->created_at->format('M d, Y - H:i')}}</td>
+                        <td class="actions">
+                            <button class="delete-btn" onclick="deleteConversation()">Supprimer</button>
+                        </td>
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>

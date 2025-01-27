@@ -6,6 +6,21 @@
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{asset('css/article.css')}}">
     <title>{{$article->titre }} | Tech Horizons</title>
+    <style>
+        .delete-btn button{
+            background-color: rgb(216, 7, 7);
+            border: none;
+            padding: 10px;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: all 0.5s linear
+        }
+
+        .delete-btn button:hover{
+            background-color: rgb(166, 2, 2)
+        }
+    </style>
 </head>
 <body>
     @include('user.profile_header')
@@ -59,9 +74,20 @@
             <div class="comment">
                 <div class="avatar"></div>
                 <div>
-                    <div class="comment-author">{{ ($comment->user)->nom }}</div>
+                    <div class="comment-author">
+                        {{ ($comment->user)->nom }}
+                    </div>
                     <div class="comment-content">{{ $comment->message }}</div>
                     <div class="comment-date">{{ $comment->created_at->format('M d, Y - H:i') }}</div>
+                    @if($user->role === 'Responsable de thème' or $user->id == ($comment->user)->id)
+                        <div class="delete-btn">
+                            <form action="{{route('comment.destroy', $comment->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete Message</button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         @endforeach
