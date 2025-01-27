@@ -84,10 +84,3 @@ Route::get('responsable/articles',[ResponsableThemeController::class, 'manageArt
 Route::get('responsable/subscribers',[ResponsableThemeController::class, 'managesubscribers'])->name('subscribers.manager');
 Route::delete('/subscription/{id}', [ResponsableThemeController::class, 'deleteSubscription'])->name('subscription.delete');
 Route::post('/articles/suggest/{article}', [ResponsableThemeController::class, 'suggestArticleForNumero'])->name('suggest.numero');
-
-use App\Http\Controllers\NumeroController; // Importez le bon contrôleur
-use App\Http\Controllers\EditorController; // Importez le bon contrôleur
-
-Route::get('/editor/dashboard', [EditorController::class, 'dashboard'])->name('editor.dashboard');
-Route::get('/numeros/create', [NumeroController::class, 'create'])->name('numeros.create'); // Utilisez NumeroController
-Route::post('/numeros', [NumeroController::class, 'store'])->name('numeros.store'); // Utilisez NumeroController

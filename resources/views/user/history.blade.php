@@ -26,7 +26,7 @@
             @foreach ($articlesHistory as $article)
                 <div class="article-card">
                     <div class="article-meta">
-                        <span>Read on {{$article->created_at->format('M d, Y')}}</span>
+                        <span>Read on {{$article->created_at->format('M d, Y - H:i')}}</span>
                         <span>•</span>
                         <span>5 min read</span>
                     </div>

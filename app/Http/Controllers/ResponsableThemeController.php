@@ -27,7 +27,7 @@ class ResponsableThemeController extends Controller{
         $subscriberCount = $theme->subscribers()->count();
 
         //Fetch articles with status "En cours" for the theme
-        $inProgressArticles = $theme->articles()->where('statut', 'En cours')->get();
+        $inProgressArticles = $theme->articles()->where('statut', 'En cours')->orderBy('created_at', 'desc')->get();
 
         $latestSubscribers = $theme->subscribers()
             ->orderBy('pivot_created_at', 'desc') // Order by subscription date (pivot table)
@@ -84,7 +84,9 @@ class ResponsableThemeController extends Controller{
         $numeros = Numero::all();
         // Fetch the single theme the user is responsible for
         $theme = $user->themes()->first();
-        $articles = $theme->articles()->get();
+        $articles = $theme->articles()
+            ->orderBy('created_at', 'desc')
+            ->get();
         $articlesCount = $theme->articles()->count();
 
         return view('responsable_theme.articles_section', compact(
@@ -116,17 +118,17 @@ class ResponsableThemeController extends Controller{
 
     }
 
-    public function suggestArticleForNumero(Request $request, Article $article)
-{
-    $request->validate([
-        'numero_id' => 'required|exists:numeros,id',
-    ]);
+    public function suggestArticleForNumero(Request $request, Article $article){
+        $request->validate([
+            'numero_id' => 'required|exists:numeros,id_numero',
+        ]);
 
-    $numero = Numero::find($request->numero_id);
-    $article->numeros()->attach($numero->id);
+        $numero = Numero::find($request->numero_id);
 
-    return redirect()->back()->with('success', 'Article suggéré pour le numéro avec succès.');
-}
+        $article->numeros()->attach($numero->id_numero);
+
+        return redirect()->back();
+    }
 
 
 

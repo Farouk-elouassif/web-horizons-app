@@ -7,6 +7,7 @@
     <title>{{$user->nom}} - Profile</title>
     <link rel="stylesheet" href="{{asset('css/Profile.css')}}">
     <link rel="stylesheet" href="{{asset('css/post.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     @include('user.profile_header')
@@ -19,7 +20,7 @@
                     </div>
                 <div class="profile-info">
                     <h2 class="profile-name">{{$user->nom}}</h2>
-                    <p class="profile-date">{{$user->created_at->format('M d, Y')}} <span class="icon-lock">🔒</span></p>
+                    <p class="profile-date">{{$user->created_at->format('M d, Y - H:i')}} <span class="icon-lock">🔒</span></p>
                 </div>
                 </div>
             </div>
@@ -39,7 +40,7 @@
                                 <a href="{{ route('article.show', $article->id) }}" class="article-title">{{ $article->titre }}</a>
                                 <p class="article-excerpt">{{ Str::limit($article->contenu, 150)}}</p>
                                 <div class="article-footer">
-                                    <span>{{$article->created_at->format('M d, Y')}}</span>
+                                    <span>{{$article->created_at->format('M d, Y - H:i')}}</span>
                                     <span>·</span>
                                     <span>{{ $article->read_time ?? '5' }} min read</span>
                                     <span>·</span>
@@ -57,20 +58,9 @@
                                     </span>
                                     <span>·</span>
                                     <span class="rating-value">Average Rating: {{ (int)$article->averageRating ?? 0 }}</span>
-                                    <span>·</span>
-                                    <span>
-                                        <form action="{{ route('article.delete', $article->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="delete-button" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this post?')">Delete</button>
-                                        </form>
-                                    </span>
                                 </div>
                             </article>
                         @endforeach
-
-
-
                     </div>
                     @endif
                 </div>
@@ -105,28 +95,28 @@
                             <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                             </svg>
-                            Notifications
+                            Be A theme Manager
                         </button>
                         <button class="action-btn">
-                            <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
-                            </svg>
-                            Reading List
+                            <i class="fa-regular fa-comment"></i>
+                            Conversations
                         </button>
-                        <button class="action-btn">
+                        <button class="action-btn" id="copyProfileButton">
                             <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
                             </svg>
                             Share Profile
                         </button>
                         <button class="action-btn">
-                            <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
+
                             @if($user->role === 'Responsable de thème')
+                                <i class="fa-solid fa-repeat"></i>
                                 <a href="{{route('respo.dashboard')}}">Switch To Manager Mode</a>
                                 @else
+                                <svg class="secondary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
                                 Settings
                             @endif
 
@@ -158,5 +148,20 @@
         </div>
     </div>
     <script src="Edit.js"></script>
+
+
+    <script>
+        var username = "{{ $user->nom }}";
+        var profileUrl = 'http://www.techhorizons.ma/' + username.replace(/ /g, '-'); // Replace spaces with hyphens
+
+        document.getElementById('copyProfileButton').addEventListener('click', function() {
+            navigator.clipboard.writeText(profileUrl).then(function() {
+                alert('Profile URL copied to clipboard: ' + profileUrl);
+            }).catch(function(error) {
+                console.error('Failed to copy: ', error);
+            });
+        });
+    </script>
+
     </body>
 </html>

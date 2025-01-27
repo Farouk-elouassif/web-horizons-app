@@ -35,7 +35,7 @@
                     <a href="{{ route('article.show', $article->id) }}" class="article-title">{{ $article->titre }}</a>
                     <p class="article-excerpt">{{ Str::limit($article->contenu, 150)}}</p>
                     <div class="article-footer">
-                        <span>{{$article->created_at->format('M d, Y')}}</span>
+                        <span>{{$article->created_at->format('M d, Y - H:i')}}</span>
                         <span>·</span>
                         <span>{{ $article->read_time ?? '5' }} min read</span>
                         <span>·</span>

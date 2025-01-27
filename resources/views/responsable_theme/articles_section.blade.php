@@ -82,7 +82,7 @@
                                 <span class="status status-draft">Refusé</span>
                             @endif
                         </td>
-                        <td>{{$article->created_at->format('M d, Y')}}</td>
+                        <td>{{$article->created_at->format('M d, Y - H:i')}}</td>
                         <td class="actions">
                             <form action="{{ route('article.destroy', $article->id) }}" method="POST" style="display: inline;">
                                 @csrf
@@ -117,6 +117,27 @@
     </div>
 
     <script>
+        function filterArticles() {
+            const statusFilter = document.getElementById('statusFilter').value.toLowerCase();
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#articlesTableBody tr');
+
+            rows.forEach(row => {
+                const statusCell = row.querySelector('td:nth-child(3) .status').textContent.toLowerCase();
+                const titleCell = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+                const authorCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                const matchesStatus = statusFilter === 'all' || statusCell.includes(statusFilter);
+                const matchesSearch = titleCell.includes(searchInput) || authorCell.includes(searchInput);
+
+
+                if (matchesStatus && matchesSearch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
         // Function to open the modal
         function openModal(articleId) {
     console.log("Article ID:", articleId); // Debugging line

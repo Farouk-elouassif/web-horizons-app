@@ -40,7 +40,7 @@
                         <td>{{$subscriber->nom}}</td>
                         <td>{{$subscriber->email}}</td>
                         <td><span class="status status-active">{{$subscriber->statut}}</span></td>
-                        <td>{{$subscriber->created_at->format('M d, Y')}}</td>
+                        <td>{{$subscriber->created_at->format('M d, Y - H:i')}}</td>
                         <td class="actions">
                             <form action="{{ route('subscription.delete', $subscriber->id) }}" method="POST" style="display: inline;">
                                 @csrf
