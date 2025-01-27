@@ -116,17 +116,17 @@ class ResponsableThemeController extends Controller{
 
     }
 
-    public function suggestArticleForNumero(Request $request, Article $article)
-{
-    $request->validate([
-        'numero_id' => 'required|exists:numeros,id',
-    ]);
+    public function suggestArticleForNumero(Request $request, Article $article){
+        $request->validate([
+            'numero_id' => 'required|exists:numeros,id_numero',
+        ]);
 
-    $numero = Numero::find($request->numero_id);
-    $article->numeros()->attach($numero->id);
+        $numero = Numero::find($request->numero_id);
 
-    return redirect()->back()->with('success', 'Article suggéré pour le numéro avec succès.');
-}
+        $article->numeros()->attach($numero->id_numero);
+
+        return redirect()->back();
+    }
 
 
 
