@@ -87,4 +87,5 @@ Route::post('/articles/suggest/{article}', [ResponsableThemeController::class, '
 Route::post('article/conversation/', [UserControlle::class, 'conversation'])->name('user.conversation');
 Route::get('responsable/conversations', [ResponsableThemeController::class, 'manageConversations'])->name('conversations.manager');
 Route::delete('/comment/{comment}', [ResponsableThemeController::class, 'deleteComment'])->name('comment.destroy');
+Route::delete('/Conversation/{article}', [ResponsableThemeController::class, 'deleteConversation'])->name('conversation.destroy');
 

@@ -15,37 +15,34 @@
 
     <div class="main-content">
         <h1>{{$theme->nom_theme}} Conversations Manager</h1>
-        <div class="filters">
-            <select id="statusFilter">
-                <option value="all">Tous les statuts</option>
-                <option value="open">Ouvertes</option>
-                <option value="closed">Fermées</option>
-            </select>
-            <input type="text" id="searchInput" placeholder="Rechercher des conversations...">
-        </div>
         <table>
             <thead>
                 <tr>
                     <th>Article</th>
                     <th>Auteur</th>
+                    <th>Number of Messages</th>
                     <th>Dernier message</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="conversationsTableBody">
-                <!-- Hardcoded example row -->
                 @foreach ($themeArticles as $article)
                     <tr>
                         <td><a href="{{ route('article.show', $article->id) }}" target="_blank">{{ $article->titre }}</a></td>
                         <td>{{ $article->author->nom }}</td>
+                        <td>{{$article->conversations->count()}}</td>
                         <td>
-                            {{-- Get the latest conversation --}}
-                            {{ $article->conversations->last()->message ?? 'No conversations' }}
+                            {{ $article->conversations->last()->message ?? 'No Messages' }}
                         </td>
                         <td>{{$article->created_at->format('M d, Y - H:i')}}</td>
                         <td class="actions">
-                            <button class="delete-btn" onclick="deleteConversation()">Supprimer</button>
+                            <form action="{{ route('conversation.destroy', $article->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                {{-- <input type="text" value="{{$article->id}}"> --}}
+                                <button type="submit" class="delete-btn">Supprimer Conversation</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

@@ -145,6 +145,13 @@ class ResponsableThemeController extends Controller{
         return redirect()->back();
     }
 
+    public function deleteConversation($id) {
+        $article = Article::findOrFail($id);
+        Conversation::where('article_id', $article->id)->delete();
+        return redirect()->back();
+    }
+
+
 
 
 
