@@ -8,6 +8,7 @@ use App\Models\Subscription;
 use App\Models\Theme;
 use App\Models\ArticleNote;
 use App\Models\NavigationHistory;
+use App\Models\Conversation;
 use Illuminate\Support\Facades\Auth;
 
 class UserControlle extends Controller {
@@ -69,6 +70,7 @@ class UserControlle extends Controller {
         });
 
 
+
         // Pass the articles to the view
         return view('user.profile', compact('articles', 'user'));
     }
@@ -82,6 +84,7 @@ class UserControlle extends Controller {
             $article->delete(); // Delete the article
             return redirect()->route('user.dashboard')->with('success', 'Article deleted successfully!');
         }
+
 
         // If the article doesn't exist or doesn't belong to the user, redirect with an error message
         return redirect()->route('user.dashboard')->with('error', 'Article not found or you do not have permission to delete it.');
@@ -98,8 +101,11 @@ class UserControlle extends Controller {
             'article_id' => $id
         ]);
 
+        $comments = Conversation::where('article_id', $article->id)->orderBy('created_at','asc')->get();
+
+
         // Pass the article to the view
-        return view('user.article', compact('article', 'user'));
+        return view('user.article', compact('article', 'user', 'comments'));
     }
 
     public function showUserHomePage(){
@@ -225,5 +231,26 @@ class UserControlle extends Controller {
                                             ->with('article')
                                             ->get();
         return view('user.history', compact('user', 'articlesHistory'));
+    }
+
+    public function conversation(Request $request){
+        $user = Auth::user();
+
+        $request->validate([
+            'message' => 'required|string|max:255',
+            'article_id' => 'required|exists:articles,id',
+        ]);
+
+        $article = Article::findOrFail($request->article_id);
+
+        Conversation::create([
+            'message' => $request->message,
+            'date_message' => now(),
+            'article_id' => $article->id,
+            'user_id' => $user->id,
+            'created_at' => now(),
+        ]);
+
+        return redirect()->back();
     }
 }

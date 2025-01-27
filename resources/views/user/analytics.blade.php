@@ -98,7 +98,7 @@
                                             <span class="status status-draft">Refusé</span>
                                         @endif
                                     </td>
-                                    <td>{{$article->created_at->format('M d, Y')}}</td>
+                                    <td>{{$article->created_at->format('M d, Y - H:i')}}</td>
                                     <td class="actions" style="padding: 1.5rem">
                                         <form action="{{ route('article.destroy', $article->id) }}" method="POST" style="display: inline;">
                                             @csrf
@@ -135,6 +135,6 @@
 
 
     <script src="{{asset('js/analytics.js')}}"></script>
-    
+
 </body>
 </html>

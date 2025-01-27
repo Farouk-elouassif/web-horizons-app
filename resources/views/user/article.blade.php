@@ -6,7 +6,6 @@
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{asset('css/article.css')}}">
     <title>{{$article->titre }} | Tech Horizons</title>
-
 </head>
 <body>
     @include('user.profile_header')
@@ -20,12 +19,11 @@
                     <div class="author-avatar">{{strtoupper($article->author->nom[0].$article->author->nom[1])}}</div>
                     <div>
                         <p class="author-name">{{$article->author->nom}}</p>
-                        <p class="publish-date">{{$article->created_at->format('M d, Y')}}</p>
+                        <p class="publish-date">{{$article->created_at->format('M d, Y - H:i')}}</p>
                         <p class="read-time">5 min read</p>
                     </div>
                 </div>
             </header>
-
 
             <div class="article-content">
                 <article>
@@ -46,15 +44,39 @@
                     <span class="rating-value">({{ (int)$article->averageRating ?? 0 }})</span>
                 </form>
             </div>
+
             <footer class="article-footer">
                 <div class="tags">
                     <a href="#" class="tag">{{$article->theme->nom_theme}}</a>
                 </div>
-
             </footer>
         </article>
     </main>
+
+
+    <div class="comments-section">
+        @foreach ($comments as $comment)
+            <div class="comment">
+                <div class="avatar"></div>
+                <div>
+                    <div class="comment-author">{{ ($comment->user)->nom }}</div>
+                    <div class="comment-content">{{ $comment->message }}</div>
+                    <div class="comment-date">{{ $comment->created_at->format('M d, Y - H:i') }}</div>
+                </div>
+            </div>
+        @endforeach
+
+        <form id="comment-form" action="{{ route('user.conversation') }}" method="POST">
+            @csrf
+            <input type="hidden" name="article_id" value="{{ $article->id }}">
+            <textarea name="message" id="comment-text" placeholder="Join the conversation..." required></textarea>
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+
+
+
     <script src="{{asset('js/article.js')}}"></script>
 </body>
 </html>
-

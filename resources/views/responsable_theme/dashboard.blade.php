@@ -47,7 +47,7 @@
 
                             </div>
                             <div class="article-meta">
-                                Par {{($article->author)->nom}} • Soumis {{$article->created_at->format('M d, Y')}}
+                                Par {{($article->author)->nom}} • Soumis {{$article->created_at->format('M d, Y - H:i')}}
                             </div>
                             <div class="btns">
                                 <form action="{{ route('article.publish', $article->id) }}" method="POST" style="display: inline;">
@@ -80,7 +80,7 @@
                             <div class="subscriber-avatar"></div>
                             <div class="subscriber-info">
                                 <div class="subscriber-name">{{$follower->nom}}</div>
-                                <div class="subscriber-meta">Rejoint {{$follower->created_at->format('M d, Y')}}</div>
+                                <div class="subscriber-meta">Rejoint {{$follower->created_at->format('M d, Y - H:i')}}</div>
                             </div>
                         </div>
                     @endforeach
