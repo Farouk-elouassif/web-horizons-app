@@ -145,6 +145,7 @@ class UserControlle extends Controller {
         // Fetch all articles written by the user
         $articles = $user->articles()
             ->select('id', 'titre', 'contenu', 'statut', 'date_proposition', 'date_publication', 'theme_id', 'user_id', 'created_at', 'updated_at')
+            ->orderBy('created_at', 'desc') // Orders by created_at in descending order
             ->get();
 
         // Fetch the IDs of the user's articles

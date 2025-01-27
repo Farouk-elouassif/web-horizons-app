@@ -66,16 +66,52 @@
                         </form>
                     </div>
                 </div>
-                {{-- <div class="recent-posts">
-                    <h2>Articles</h2>
-                    @foreach ($articles as $article)
-                        <div class="post-item">
-                            <div class="post-title">{{$article->titre}}</div>
-                            <div class="post-stats">{{$article->statut}} · {{$article->theme->nom_theme}}</div>
-                        </div>
-                    @endforeach
+                <div style="margin-top: 25px;">
+                    <select id="statusFilter" onchange="filterArticles()">
+                        <option value="all">Tous les statuts</option>
+                        <option value="Publié">Publiés</option>
+                        <option value="EnCours">En Cours</option>
+                        <option value="Refusé">Refusés</option>
+                    </select>
+                    <input type="text" id="searchInput" placeholder="Rechercher des articles..." oninput="filterArticles()">
+                    <table style="margin-top: 25px;">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Topic</th>
+                                <th>Statut</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="articlesTableBody">
+                            @foreach ($articles as $article)
+                                <tr>
+                                    <td><a href="{{ route('article.show', $article->id) }}" target="_blank">{{$article->titre}}</a></td>
+                                    <td>{{($article->theme)->nom_theme}}</td>
+                                    <td>
+                                        @if ($article->statut === 'Publié')
+                                            <span class="status status-published">Publié</span>
+                                        @elseif($article->statut === 'En cours')
+                                            <span class="status status-review">EnCours</span>
+                                        @elseif($article->statut === 'Refusé')
+                                            <span class="status status-draft">Refusé</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$article->created_at->format('M d, Y')}}</td>
+                                    <td class="actions" style="padding: 1.5rem">
+                                        <form action="{{ route('article.destroy', $article->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-btn" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-                </div> --}}
             </div>
 
             <div class="sidebar">
@@ -99,5 +135,6 @@
 
 
     <script src="{{asset('js/analytics.js')}}"></script>
+    
 </body>
 </html>

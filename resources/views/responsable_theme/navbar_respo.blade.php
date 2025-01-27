@@ -30,7 +30,7 @@
         </li>
         <li class="nav-item">
             <a href="{{route('user.articles')}}" class="nav-link">
-                <i class="fas fa-cog"></i>
+                <i class="fa-solid fa-repeat"></i>
                 Switch To User Mode
             </a>
         </li>
