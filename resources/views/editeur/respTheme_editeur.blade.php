@@ -13,7 +13,7 @@
     @include('editeur.navbar_editeur')
 
     <div class="main-content">
-        <h1>Tech Horizon Users Manager ({{$users->count()}})</h1>
+        <h1>Tech Horizon Managers Manager ({{$responsables->count()}})</h1>
         <div class="filters">
             <select id="statusFilter">
                 <option value="all">Tous les statuts</option>
@@ -34,30 +34,30 @@
                 </tr>
             </thead>
             <tbody id="subscriptionsTableBody">
-                @foreach ($users as $subscriber)
+                @foreach ($responsables as $respo)
                     <tr>
-                        <td>{{$subscriber->nom}}</td>
-                        <td>{{$subscriber->email}}</td>
+                        <td>{{$respo->nom}}</td>
+                        <td>{{$respo->email}}</td>
                         <td>
-                            @if($subscriber->statut == 'Inactif')
-                                <span class="status status-inactive">{{$subscriber->statut}}</span>
+                            @if($respo->statut == 'Inactif')
+                                <span class="status status-inactive">{{$respo->statut}}</span>
                             @else
-                                <span class="status status-active">{{$subscriber->statut}}</span>
+                                <span class="status status-active">{{$respo->statut}}</span>
                             @endif
                         </td>
-                        <td>{{$subscriber->role}}</td>
-                        <td>{{$subscriber->created_at->format('M d, Y - H:i')}}</td>
+                        <td>{{$respo->role}}</td>
+                        <td>{{$respo->created_at->format('M d, Y - H:i')}}</td>
                         <td class="actions" style="padding: 1.5rem">
-                            <form action="{{ route('editeur.userStatut', $subscriber->id) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('editeur.userStatut', $respo->id) }}" method="POST" style="display: inline;">
                                 @csrf
-                                @if($subscriber->statut == 'Inactif')
+                                @if($respo->statut == 'Inactif')
                                     <button type="submit" class="activate-btn" onclick="return confirm('Are you sure you want to activate this user?')">Activate</button>
                                 @else
                                     <button type="submit" class="block-btn" onclick="return confirm('Are you sure you want to block this user?')">Block</button>
                                 @endif
                             </form>
 
-                            <form action="{{route('editeur.deleteUser', $subscriber->id)}}" method="POST" style="display: inline;">
+                            <form action="{{route('editeur.deleteUser', $respo->id)}}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="delete-btn" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete?')">Delete</button>

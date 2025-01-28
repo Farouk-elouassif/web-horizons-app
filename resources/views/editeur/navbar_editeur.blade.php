@@ -23,7 +23,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('conversations.manager')}}" class="nav-link">
+            <a href="{{route('editeur.managers')}}" class="nav-link">
                 <i class="fa-solid fa-user"></i>
                 Responsables des themes
             </a>

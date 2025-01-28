@@ -34,7 +34,6 @@
                 </tr>
             </thead>
             <tbody id="subscriptionsTableBody">
-                <!-- Hardcoded example row -->
                 @foreach ($subscribers as $subscriber)
                     <tr>
                         <td>{{$subscriber->nom}}</td>

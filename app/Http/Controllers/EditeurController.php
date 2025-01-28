@@ -38,17 +38,16 @@ class EditeurController extends Controller
     }
 
     public function manageArticles(){
-        $articles = Article::all();
+        $articles = Article::orderBy('created_at', 'desc')->get();
         return view('editeur.articles_editeur', compact('articles'));
     }
 
     public function manageUsers(){
-        $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->get();
         return view('editeur.users_editeur', compact('users'));
     }
 
     public function userStatut(User $user){
-        \Log::info('User status update triggered for user ID: ' . $user->id);
         if($user->statut == 'Actif'){
             $user->update(['statut' => 'Inactif']);
         } else {
@@ -56,4 +55,15 @@ class EditeurController extends Controller
         }
         return redirect()->back();
     }
+
+    public function deleteUser(User $userToDelete){
+        $userToDelete->delete();
+        return redirect()->back();
+    }
+
+    public function showManagers(){
+        $responsables = DB::table('theme_user')->get();
+        return view('editeur.respTheme_editeur', compact('responsables'));
+    }
+
 }
