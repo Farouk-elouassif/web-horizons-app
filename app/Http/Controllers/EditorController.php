@@ -13,3 +13,4 @@ class EditorController extends Controller
         return view('editor.dashboard');
     }
 }
+?>
