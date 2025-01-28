@@ -89,28 +89,6 @@
             </div>
         </div>
 
-        <div class="section-card" style="margin-top: 1.5rem;">
-            <div class="section-header">
-                <h2 class="section-title">Conversations Récentes</h2>
-                <button class="action-button">Voir Tout</button>
-            </div>
-            <div class="conversation-list">
-                <div class="conversation-item">
-                    <div class="conversation-header">
-                        <div class="conversation-title">Discussion: L'Éthique dans l'IA</div>
-                        <div class="conversation-count">24 messages</div>
-                    </div>
-                    <div class="article-meta">Dernier message il y a 30 minutes</div>
-                </div>
-                <div class="conversation-item">
-                    <div class="conversation-header">
-                        <div class="conversation-title">Débat: IA vs Intelligence Humaine</div>
-                        <div class="conversation-count">18 messages</div>
-                    </div>
-                    <div class="article-meta">Dernier message il y a 2 heures</div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <script>

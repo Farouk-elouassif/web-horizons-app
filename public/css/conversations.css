@@ -36,6 +36,8 @@ body {
     padding-bottom: 100px
 }
 
+
+
 /* Table styles */
 table {
     width: 100%;
@@ -126,3 +128,6 @@ table td a:hover{
     text-decoration: underline;
 }
 
+h1{
+    margin-bottom: 40px;
+}
