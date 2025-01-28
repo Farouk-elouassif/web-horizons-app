@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserControlle;
 use App\Http\Controllers\invitedController;
 use App\Http\Controllers\ResponsableThemeController;
+use App\Http\Controllers\EditeurController;
 use App\Models\Theme;
 
 
@@ -55,7 +56,7 @@ Route::middleware('auth')->group(function () {
 
     // Route to display the themes page
     Route::get('/themes', function () {
-        $themes = Theme::all(); // Fetch all themes from the database
+        $themes = Theme::all();
         return view('auth.themes', compact('themes'));
     })->name('themes');
 
@@ -89,3 +90,8 @@ Route::get('responsable/conversations', [ResponsableThemeController::class, 'man
 Route::delete('/comment/{comment}', [ResponsableThemeController::class, 'deleteComment'])->name('comment.destroy');
 Route::delete('/Conversation/{article}', [ResponsableThemeController::class, 'deleteConversation'])->name('conversation.destroy');
 
+
+Route::get('/editeur/dashboard', [EditeurController::class, 'showDashboard'])->name('editeur.dashboard');
+Route::get('/editeur/articles', [EditeurController::class, 'manageArticles'])->name('editeur.articles');
+Route::get('/editeur/users', [EditeurController::class, 'manageUsers'])->name('editeur.users');
+Route::post('/editeur/activate-user/{user}', [EditeurController::class, 'userStatut'])->name('editeur.userStatut');

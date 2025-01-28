@@ -25,14 +25,14 @@ class AuthController extends Controller{
             'password' => 'required',
         ]);
 
-        
+
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // Get the authenticated user
             $user = Auth::user();
 
             // Redirect based on the user's role
             if ($user->role === 'Éditeur') {
-                return redirect()->route('editor.dashboard');
+                return redirect()->route('editeur.dashboard');
             } elseif ($user->role ===  'Responsable de thème') {
                 return redirect()->route('respo.dashboard');
             } elseif ($user->role === 'Abonné' ) {
