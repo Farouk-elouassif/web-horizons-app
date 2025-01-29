@@ -44,7 +44,8 @@ class EditeurController extends Controller
 
     public function manageUsers(){
         $users = User::orderBy('created_at', 'desc')->get();
-        return view('editeur.users_editeur', compact('users'));
+        $themes = Theme::all();
+        return view('editeur.users_editeur', compact('users', 'themes'));
     }
 
     public function userStatut(User $user){
@@ -61,9 +62,38 @@ class EditeurController extends Controller
         return redirect()->back();
     }
 
-    public function showManagers(){
-        $responsables = DB::table('theme_user')->get();
-        return view('editeur.respTheme_editeur', compact('responsables'));
+    public function promoteUser(Request $request, User $user) {
+        try {
+            DB::beginTransaction();
+
+            // Get theme ID from request
+            $themeId = $request->input('theme');
+
+            // Verify theme exists
+            $theme = Theme::findOrFail($themeId);
+
+            // Update user role
+            $user->update(['role' => 'Responsable de thème']);
+
+            // Attach user to theme
+            $user->themes()->attach($themeId);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'User promoted successfully!');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Failed to promote user: ' . $e->getMessage());
+        }
+    }
+
+
+    public function demoteUser(User $user){
+        $user->update(['role' => 'Abonné']);
+        return redirect()->back();
+
+        DB::table('theme_user')->where('user_id', $user->id)->delete();
+        return redirect()->back();
     }
 
 }

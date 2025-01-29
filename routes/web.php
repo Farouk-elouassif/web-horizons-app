@@ -96,4 +96,6 @@ Route::get('/editeur/articles', [EditeurController::class, 'manageArticles'])->n
 Route::get('/editeur/users', [EditeurController::class, 'manageUsers'])->name('editeur.users');
 Route::post('/editeur/activate-user/{user}', [EditeurController::class, 'userStatut'])->name('editeur.userStatut');
 Route::delete('/editeur/delete-user/{userToDelete}', [EditeurController::class, 'deleteUser'])->name('editeur.deleteUser');
-Route::get('/editeur/managers', [EditeurController::class, 'showManagers'])->name('editeur.managers');
+Route::post('/editeur/promote-user/{user}', [EditeurController::class, 'promoteUser'])->name('editeur.promoteUser');
+Route::delete('/editeur/demote-user/{user}', [EditeurController::class, 'demoteUser'])->name('editeur.demoteUser');
+
