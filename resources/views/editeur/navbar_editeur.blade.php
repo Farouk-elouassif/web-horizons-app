@@ -13,25 +13,25 @@
         <li class="nav-item">
             <a href="{{route('editeur.users')}}" class="nav-link">
                 <i class="fas fa-users"></i>
-                Users
+                Manage Users
             </a>
         </li>
         <li class="nav-item">
             <a href="{{route('editeur.articles')}}" class="nav-link">
                 <i class="fas fa-newspaper"></i>
-                Articles
+                Manage Articles
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('conversations.manager')}}" class="nav-link">
+            <a href="{{route('editeur.numeros')}}" class="nav-link">
                 <i class="fa-solid fa-arrow-up-9-1"></i>
-                Numeros
+                Manage Numeros
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{route('conversations.manager')}}" class="nav-link">
+            <a href="{{route('editeur.themes')}}" class="nav-link">
                 <i class="fa-regular fa-comment"></i>
-                Themes
+                Manage Themes
             </a>
         </li>
         <li class="nav-item">

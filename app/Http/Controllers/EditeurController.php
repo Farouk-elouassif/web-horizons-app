@@ -63,7 +63,7 @@ class EditeurController extends Controller
     }
 
     public function promoteUser(Request $request, User $user) {
-        try {
+
             DB::beginTransaction();
 
             // Get theme ID from request
@@ -81,10 +81,6 @@ class EditeurController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'User promoted successfully!');
 
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Failed to promote user: ' . $e->getMessage());
-        }
     }
 
 
@@ -95,5 +91,37 @@ class EditeurController extends Controller
         DB::table('theme_user')->where('user_id', $user->id)->delete();
         return redirect()->back();
     }
+
+    public function manageThemes(){
+        $themes = Theme::all();
+        return view('editeur.themes_editeur', compact('themes'));
+    }
+
+    public function deleteTheme(Theme $theme){
+        $theme->delete();
+        return redirect()->back();
+    }
+
+    public function addTheme(Request $request){
+        Theme::create([
+            'nom_theme' => $request->nom_theme,
+            'description' =>$request->description,
+            'created_at' => now(),
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function numerosManager(){
+        $numeros = Numero::all();
+        return view('editeur.numeros_editeur', compact('numeros'));
+    }
+
+    public function deleteNumero($id)
+{
+    $numero = Numero::where('Id_numero', $id)->firstOrFail();
+    $numero->delete();
+    return redirect()->back();
+}
 
 }

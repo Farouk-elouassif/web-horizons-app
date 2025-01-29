@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Numero extends Model
 {
+    public function getRouteKeyName()
+{
+    return 'Id_numero';
+}
+
     public function articles(): BelongsToMany
 {
     return $this->belongsToMany(Article::class, 'article_numero', 'numero_id', 'article_id');

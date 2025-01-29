@@ -98,4 +98,11 @@ Route::post('/editeur/activate-user/{user}', [EditeurController::class, 'userSta
 Route::delete('/editeur/delete-user/{userToDelete}', [EditeurController::class, 'deleteUser'])->name('editeur.deleteUser');
 Route::post('/editeur/promote-user/{user}', [EditeurController::class, 'promoteUser'])->name('editeur.promoteUser');
 Route::delete('/editeur/demote-user/{user}', [EditeurController::class, 'demoteUser'])->name('editeur.demoteUser');
+Route::get('/editeur/themes-manager', [EditeurController::class, 'manageThemes'])->name('editeur.themes');
+Route::delete('/editeur/delete-theme/{theme}', [EditeurController::class, 'deleteTheme'])->name('editeur.deleteTheme');
+Route::post('/editeur/add-theme', [EditeurController::class, 'addTheme'])->name('editeur.addTheme');
+Route::get('/editeur/numeros-manager', [EditeurController::class, 'numerosManager'])->name('editeur.numeros');
+Route::delete('/editeur/delete-numero/{id}', [EditeurController::class, 'deleteNumero'])->name('editeur.deleteNumero');
+
+
 

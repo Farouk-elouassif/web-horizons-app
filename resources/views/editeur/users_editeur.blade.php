@@ -46,7 +46,7 @@
                             </span>
                         </td>
                         <td>{{ $subscriber->role }}</td>
-                        <td class="actions">
+                        <td class="actions" style="padding: 1.5rem">
                             <form action="{{ route('editeur.userStatut', $subscriber->id) }}" method="POST" class="inline-form">
                                 @csrf
                                 <button type="submit" class="{{ $subscriber->statut == 'Inactif' ? 'activate-btn' : 'block-btn' }}"
