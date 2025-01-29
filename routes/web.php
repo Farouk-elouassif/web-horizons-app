@@ -103,6 +103,10 @@ Route::delete('/editeur/delete-theme/{theme}', [EditeurController::class, 'delet
 Route::post('/editeur/add-theme', [EditeurController::class, 'addTheme'])->name('editeur.addTheme');
 Route::get('/editeur/numeros-manager', [EditeurController::class, 'numerosManager'])->name('editeur.numeros');
 Route::delete('/editeur/delete-numero/{id}', [EditeurController::class, 'deleteNumero'])->name('editeur.deleteNumero');
+Route::post('/editeur/desactivate-numero/{id}', [EditeurController::class, 'desactivateNumero'])->name('editeur.desactivateNumero');
+Route::post('/editeur/publie-numero/{id}', [EditeurController::class, 'publieNumero'])->name('editeur.publieNumero');
+Route::post('/editeur/add-numero', [EditeurController::class, 'addNumero'])->name('editeur.addNumero');
+
 
 
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users Manager - Tech Horizons</title>
+    <title>Numeros Manager - Tech Horizons</title>
 
     <link rel="stylesheet" href="{{ asset('css/respo_theme_dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/subscribers_section.css') }}">
@@ -14,7 +14,7 @@
     @include('editeur.navbar_editeur')
 
     <div class="main-content">
-        <h1 style="margin-bottom: 3rem">Tech Horizon Themes Manager ({{$numeros->count()}})</h1>
+        <h1 style="margin-bottom: 3rem">Tech Horizon Numeros Manager ({{$numeros->count()}})</h1>
         <table>
             <thead>
                 <tr>
@@ -31,7 +31,7 @@
                         <td>{{$numero->statut}}</td>
                         <td>{{$numero->created_at->format('M d, Y')}}</td>
                         <td>
-                            <form action="" method="POST" class="inline-form">
+                            <form action="{{route('editeur.deleteNumero', $numero->Id_numero)}}" method="POST" class="inline-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete?')">
@@ -39,17 +39,15 @@
                                 </button>
                             </form>
                             @if($numero->statut == 'Publié')
-                                <form action="{{route('editeur.deleteNumero', $numero->Id_numero)}}" method="POST" class="inline-form" style="margin: 2px">
+                                <form action="{{route('editeur.desactivateNumero', $numero->Id_numero)}}" method="POST" class="inline-form" style="margin: 2px">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="block-btn" onclick="return confirm('Are you sure you want to delete?')">
-                                        Desactive
+                                    <button type="submit" class="block-btn" onclick="return confirm('Are you sure you want to desactivate?')">
+                                        Desactivé
                                     </button>
                                 </form>
                             @else
-                                <form action="" method="POST" class="inline-form">
+                                <form action="{{route('editeur.publieNumero', $numero->Id_numero)}}" method="POST" class="inline-form">
                                     @csrf
-                                    @method('DELETE')
                                     <button type="submit" class="activate-btn" onclick="return confirm('Are you sure you want to delete?')">
                                         Publié
                                     </button>
@@ -62,10 +60,10 @@
         </table>
         <div class="add-theme-section" style="margin-top: 2rem">
             <h2 style="margin-bottom: 1rem">Ajouter un Nouveau Numero</h2>
-            <form action="{{route('editeur.addTheme')}}" method="POST" class="theme-form">
+            <form action="{{route('editeur.addNumero')}}" method="POST" class="theme-form">
                 @csrf
                 <label for="nom_theme">Nom du Numero:</label>
-                <input type="text" id="nom_theme" name="nom_theme" required>
+                <input type="text" id="titre_numero" name="titre_numero" required>
                 <button type="submit" class="activate-btn">Ajouter Numero</button>
             </form>
         </div>

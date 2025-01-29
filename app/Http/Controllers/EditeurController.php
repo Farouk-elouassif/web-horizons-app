@@ -117,11 +117,33 @@ class EditeurController extends Controller
         return view('editeur.numeros_editeur', compact('numeros'));
     }
 
-    public function deleteNumero($id)
-{
-    $numero = Numero::where('Id_numero', $id)->firstOrFail();
-    $numero->delete();
-    return redirect()->back();
-}
+    public function deleteNumero($id){
+        $numero = Numero::where('Id_numero', $id)->firstOrFail();
+        $numero->delete();
+        return redirect()->back();
+    }
+
+    public function desactivateNumero($id){
+        $numero = Numero::where('Id_numero', $id)->firstOrFail();
+        $numero->update(['statut' => 'Désactivé']);
+        return redirect()->back();
+    }
+
+    public function publieNumero($id){
+        $numero = Numero::where('Id_numero', $id)->firstOrFail();
+        $numero->update(['statut' => 'Publié']);
+        return redirect()->back();
+    }
+
+    public function addNumero(Request $request){
+        Numero::create([
+            'titre_numero' => $request->titre_numero,
+            'statut' => 'Désactivé',
+            'date_publication' =>now(),
+            'created_at' => now()
+        ]);
+
+        return redirect()->back();
+    }
 
 }

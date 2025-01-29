@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/articles_respo_section.css') }}">
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Gestion des Articles - Tech Horizons</title>
+    <title>Articles Manager - Tech Horizons</title>
 </head>
 <body>
     @include('editeur.navbar_editeur')
