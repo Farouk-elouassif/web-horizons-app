@@ -17,8 +17,6 @@
             <h1>Reading History</h1>
             <div class="history-stats">
                 <span>Articles read: {{count($articlesHistory)}}</span>
-                <span>•</span>
-                <span>Last 30 days</span>
             </div>
         </div>
 

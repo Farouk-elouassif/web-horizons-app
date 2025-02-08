@@ -12,7 +12,7 @@ use App\Models\Conversation;
 use Illuminate\Support\Facades\Auth;
 
 class UserControlle extends Controller {
-    // Show the form to create a post
+    
     public function showCreatePoste(){
         $user = Auth::user();
         $subscribedThemes = $user->subscribedThemes;

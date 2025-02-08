@@ -15,14 +15,12 @@ class Conversation extends Model
     ];
 
     // Conversation belongs to a user
-    public function user(): BelongsTo
-    {
+    public function user(): BelongsTo{
         return $this->belongsTo(User::class);
     }
 
     // Conversation belongs to an article
-    public function article(): BelongsTo
-    {
+    public function article(): BelongsTo{
         return $this->belongsTo(Article::class);
     }
 }

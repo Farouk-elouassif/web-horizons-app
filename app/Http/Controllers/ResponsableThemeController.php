@@ -49,7 +49,6 @@ class ResponsableThemeController extends Controller{
         ));
     }
 
-    // Method to delete an article
     public function destroy(Article $article){
         // Delete the article
         $article->delete();
@@ -58,7 +57,6 @@ class ResponsableThemeController extends Controller{
         return redirect()->back();
     }
 
-    // Method to publish an article
     public function publish(Article $article){
         // Check if the article is in "En cours" status
         if ($article->status != 'Publié') {
@@ -73,7 +71,6 @@ class ResponsableThemeController extends Controller{
         return redirect()->back()->with('error', 'Article cannot be published.');
     }
 
-    // Method to DENY an article
     public function deny(Article $article){
             $article->update(['statut' => 'Refusé']);
             return redirect()->back()->with('success', 'Article published successfully!');
@@ -150,9 +147,5 @@ class ResponsableThemeController extends Controller{
         Conversation::where('article_id', $article->id)->delete();
         return redirect()->back();
     }
-
-
-
-
 
 }

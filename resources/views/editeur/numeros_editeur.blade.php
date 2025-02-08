@@ -48,7 +48,7 @@
                             @else
                                 <form action="{{route('editeur.publieNumero', $numero->Id_numero)}}" method="POST" class="inline-form">
                                     @csrf
-                                    <button type="submit" class="activate-btn" onclick="return confirm('Are you sure you want to delete?')">
+                                    <button type="submit" class="activate-btn" onclick="return confirm('Are you sure you want to Activate?')">
                                         Publié
                                     </button>
                                 </form>

@@ -30,14 +30,18 @@ class AuthController extends Controller{
             // Get the authenticated user
             $user = Auth::user();
 
-            // Redirect based on the user's role
-            if ($user->role === 'Éditeur') {
-                return redirect()->route('editeur.dashboard');
-            } elseif ($user->role ===  'Responsable de thème') {
-                return redirect()->route('respo.dashboard');
-            } elseif ($user->role === 'Abonné' ) {
-                return redirect()->route('user.articles');
+            if($user->statut === 'Inactif'){
+                return redirect()->route('pending');
+            }else {
+                if ($user->role === 'Éditeur') {
+                    return redirect()->route('editeur.dashboard');
+                } elseif ($user->role ===  'Responsable de thème') {
+                    return redirect()->route('respo.dashboard');
+                } elseif ($user->role === 'Abonné' ) {
+                    return redirect()->route('user.articles');
+                }
             }
+
 
         }
 
@@ -106,6 +110,6 @@ class AuthController extends Controller{
         }
 
         // Redirect or return a response
-        return redirect()->route('user.dashboard');
+        return redirect()->route('pending');
     }
 }

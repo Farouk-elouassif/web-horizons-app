@@ -83,7 +83,6 @@ class EditeurController extends Controller
 
     }
 
-
     public function demoteUser(User $user){
         $user->update(['role' => 'Abonné']);
         return redirect()->back();

@@ -33,6 +33,10 @@ Route::get('/topics', function () {
     return view('topics', compact('themes'));
 })->name('topics');
 
+Route::get('/pending', function(){
+    return view('pending');
+})->name('pending');
+
 
 
 
